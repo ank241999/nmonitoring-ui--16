@@ -1,13 +1,4 @@
 pipeline {
-		stage('Build') {
-            steps {
-                sh "node_modules/.bin/ng build --prod"
-            }
-        }
-     }
-}
-
-pipeline {
      stages {
         stage('Install npm Packages') {
            agent {
