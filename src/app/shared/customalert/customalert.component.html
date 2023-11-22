@@ -1,0 +1,49 @@
+<div class="alert-modal" style="padding: 0px !important; height: 188px !important;">
+    <div>
+        <h4 class="alert-modal-title">Confirmation!
+            <!--{{title}}-->
+            <img alt="" src="../../../assets/images/closescreen_icon.jpg" (click)="onScreenClose()"
+                style="cursor: pointer;border: solid 0px;height: 20px; width: 20px;margin-right:10px; float: right;" />
+        </h4>
+    </div>
+    <div class="row" style="text-align: center;">
+        <div class="col-xs-1">&nbsp;</div>
+        <div class="col-xs-10">
+            <div>
+                <span class="form-label form-label-big col-sm-12"
+                    style="font-size: 16px;font-weight: bold;margin-top: 20px;" >
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red;"></i>
+                    {{ text }}
+                </span>
+            </div>
+        </div>
+        <div class="col-xs-1">&nbsp;</div>
+    </div>
+
+    <div >
+        <!-- <input class="alert-modal-input form-control" [(ngModel)]="inputData"> -->
+        <div class="alert-modal-buttons" style="margin-top: 25px !important;">
+            <!-- <button type="button" class="btn alert-modal-button alert-modal-button-failure"
+                [mat-dialog-close]="false">NO</button>
+            <button type="button" class="btn alert-modal-button alert-modal-button-success"
+                [mat-dialog-close]="inputData">YES</button> -->
+
+            <button class="globalButton figmabtnsqr72"
+                style="width: 45px !important; height: 45px !important;border-radius: 5px !important;" [mat-dialog-close]="false">
+                <span class="fa-stack">
+                    <i class="fa fa-close fa-stack-2x" aria-hidden="true"
+                        style="color: #ffffff;"></i>
+                </span>
+                <p style="font-size:10px;">NO</p>
+            </button>
+            <button class="globalButton figmabtnsqr72"
+                style="width: 45px !important; height: 45px !important;border-radius: 5px !important; margin-left: 10px !important;" [mat-dialog-close]="true">
+                <span class="fa-stack">
+                    <i class="fa fa-thumbs-up fa-stack-2x" aria-hidden="true"
+                        style="color: #ffffff;"></i>
+                </span>
+                <p style="font-size:10px;">YES</p>
+            </button>
+        </div>
+    </div>    
+</div>

@@ -1,0 +1,329 @@
+<div class="main-navbar-container" style="width: 100%; height: 60px; z-index: 999;">
+    <div class="row" style="width: 100%;">
+        <div class="col-lg-3 col-xs-3">&nbsp;</div>
+        <div class="col-lg-6 col-xs-5">
+            <div class="branding-col">
+                <div class="brand-wrapper" style="text-align: center;">
+                    <img class="brand-logo" src="kong/location/logo"
+                        onerror="this.onerror=null; this.src='/assets/images/Liberty-Defense-Logo-.png'" alt="Logo"
+                        height="55">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-4">&nbsp;</div>
+    </div>
+</div>
+<div class="inputWrapper login">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
+                        <h2 class="title_text" translate
+                            style="font-size: 30px; font-weight: bold;text-align: center; margin-top: 10px;">
+                            Change Password
+                        </h2>
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
+                <div class="login_wrapper">
+                    <form class="form-horizontal terms-form" [formGroup]="form" (ngSubmit)="onclick()">
+                        <div class="row text-center responsive-hide">
+                            <div class="col-sm-12">
+                                <h2>&nbsp;</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2"> </div>
+                            <div class="col-sm-8">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row"
+                                            [ngClass]="{ 'has-error': ((form.get('password')?.invalid) && (form.get('password')?.dirty)) }">
+                                            <label class="form-label form-label-big"
+                                                style="text-align:left !important; color: black; font-size: 12px; margin-bottom: 5px;margin-top: 5px;"><i
+                                                    class="fa fa-light fa-lock"></i>&nbsp;NEW
+                                                PASSWORD</label>
+                                            <input [type]="showPasswordOnPress ? 'text' : 'password'"
+                                                formControlName="password" class="form-control" placeholder=""
+                                                (focusout)="passwordValidation($event)">
+                                            <div (pointerdown)="showPasswordOnPress = !showPasswordOnPress"
+                                                (pointerup)="showPasswordOnPress = !showPasswordOnPress"
+                                                (pointerleave)="showPasswordOnPress = false">
+                                                <i alt="show" class="fa fa-eye"
+                                                    style="position: absolute;right: 10px;top: 35px;font-size: 20px;"
+                                                    [class.hide]="showPasswordOnPress"></i>
+                                                <i alt="hide" class="fa fa-eye-slash"
+                                                    style="position: absolute;right: 10px;top: 35px;font-size: 20px;"
+                                                    [class.hide]="!showPasswordOnPress"></i>
+                                            </div>
+                                        </div>
+                                        <div class="row validation-errors"
+                                            [ngClass]="{ 'has-error': (!isPasswordValid) }">
+                                            <ng-container *ngFor="let error of validationMessages.password">
+                                                <div class="help-block" style="text-align: left;"
+                                                    *ngIf="form.get('password')?.hasError(error.type) && (form.get('password')?.dirty || form.get('password')?.touched)">
+                                                    {{ error.message }}
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row"
+                                            [ngClass]="{ 'has-error': ((form.get('confirmPassword')?.invalid) && (form.get('confirmPassword')?.dirty)) }">
+                                            <label class="form-label form-label-big"
+                                                style="text-align:left !important; color: black; font-size: 12px; margin-bottom: 5px;margin-top: 5px;"><i
+                                                    class="fa fa-light fa-lock"></i>&nbsp;CONFIRM
+                                                PASSWORD</label>
+                                            <input [type]="showConfirmPasswordOnPress ? 'text' : 'password'"
+                                                formControlName="confirmPassword" class="form-control" placeholder=""
+                                                (focusout)="comparePassword()">
+                                            <div (pointerdown)="showConfirmPasswordOnPress = !showConfirmPasswordOnPress"
+                                                (pointerup)="showConfirmPasswordOnPress = !showConfirmPasswordOnPress"
+                                                (pointerleave)="showConfirmPasswordOnPress = false">
+                                                <i alt="show" class="fa fa-eye"
+                                                    style="position: absolute;right: 10px;top: 35px;font-size: 20px;"
+                                                    [class.hide]="showConfirmPasswordOnPress"></i>
+                                                <i alt="hide" class="fa fa-eye-slash"
+                                                    style="position: absolute;right: 10px;top: 35px;font-size: 20px;"
+                                                    [class.hide]="!showConfirmPasswordOnPress"></i>
+                                            </div>
+                                        </div>
+                                        <div class="row validation-errors" style="text-align: left;"
+                                            [ngClass]="{ 'has-error': (!isPasswordValid) }">
+                                            <div class="help-block" *ngIf="!isPasswordValid" translate>
+                                                addNotamatch
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="row">
+                                    <label class="form-label form-label-big"
+                                        style="text-align:left !important; color: #9b9b9b; font-size: 12px; margin-bottom: 5px;">LANGUAGE</label>
+                                </div>
+                                <div class="row">
+                                    <select style="margin-bottom: 10px;" class="form-control" formControlName="language"
+                                        [id]="'language'" #t>
+                                        <option *ngFor="let lang of languages" [value]="lang.id">
+                                            {{ lang.value }}
+                                        </option>
+                                    </select>
+                                </div> -->
+                                <div class="row">
+                                    <label class="form-label form-label-big"
+                                        style="text-align:left !important; color: black; font-size: 12px; margin-bottom: 5px;margin-top: 5px;"><i
+                                            class="fa fa-shield"></i>&nbsp;PRIVACY
+                                        POLICY</label>
+                                </div>
+                                <div class="row">
+                                    <div
+                                        style="width:100%; overflow-y: auto; height: 300px; border: 1px solid #e4e4e4; padding: 15px;">
+                                        <p word-wrap="normal" style="text-align: left; color: black;">
+                                            {{privacyPolicy}}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top: 10px;">
+                                    <mat-checkbox class="col-xs-1" (change)="changeCheck($event)" name="terms"
+                                        value="agreement" style="width: 24px; padding:0px;">&nbsp;</mat-checkbox>
+                                    <label style="color: #143345; margin-top: 2px;">I accept all terms and
+                                        agreements.</label><br>
+                                </div>
+                                <div class="row">
+                                    <div class="alert-modal-button">
+                                        <div class="col-md-12">
+                                            <button type="submit" class="globalButton"
+                                                [disabled]="!form.valid || !agreement"
+                                                style="height: 100px;width: 100px; font-size: 16px;">
+                                                <span><i class="fa fa-arrow-circle-o-right fa-2x"
+                                                        aria-hidden="true"></i>
+                                                    <p>NEXT</p>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="main-navbar-container" style="width: 100%; height: 60px; z-index: 999;">
+    <div class="row">
+        <div class="col-lg-3 col-xs-3">&nbsp;</div>
+        <div class="col-lg-6 col-xs-5">
+            <div class="branding-col">
+                <div class="brand-wrapper" style="text-align: center;">
+                    <img alt="" alt="Liberty Defense" class="brand-logo" [src]="logoImagePath" height="55"
+                        style="margin-top: 5px;">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-xs-4 text-right mt-15">
+            <button type="button" (click)="onAddClick()" class="menu-toggle"
+                style="font-size: 26px; cursor: pointer; background: none; border: 0px none;" *ngIf="isMobile">
+                <i class="fa fa-cogs"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="inputWrapper login">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">
+                <div class="login_wrapper">
+
+                    <form class="form-horizontal login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="row text-center responsive-hide">
+                                    <div class="col-sm-12">
+                                        <h2>&nbsp;</h2>
+                                    </div>
+                                </div>
+                                <div class="row text-center">
+                                    <div class="col-sm-12">
+                                        <h2 class="title_text" translate>lblLoginHeading</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-8">
+
+                                    <div class="row text-center mt-25">
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                        <label class="col-xs-8 col-sm-10 label-text nopadding"
+                                            translate>lblNameOrEmail</label>
+                                        <div class="col-xs-2 col-sm-1 responsive-hide">&nbsp;</div>
+                                    </div>
+
+                                    <div class="row text-center">
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                        <div class="col-xs-8 col-sm-10 nopadding" id="email_input_wrapper">
+                                            <input id="email" #email type="email" class="form-control"
+                                                placeholder="{{'lblTypename' | translate}}" (paste)="onPaste($event)"
+                                                formControlName="email" autocomplete="off">
+                                            <span class="message-text" style="top: 10px;"
+                                                translate>lblLoggedInAlready</span>
+
+
+                                            <div class="autocomplete_container">
+                                                <div (click)="autofill(option.email)" class="list_option"
+                                                    *ngFor="let option of filteredOptions | async"
+                                                    [attr.id]="option.email">
+                                                    <div class="float-left">
+                                                        <div class="autocomplete_name">{{option.firstName}}
+                                                            {{option.lastName}}</div>
+                                                        <div class="autocomplete_email">{{option.email}}</div>
+                                                    </div>
+                                                    <div class="float-left" *ngIf="option.loggedIn">
+                                                        <span class="message-text-list"
+                                                            translate>lblLoggedInAlready</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-2 col-sm-1">
+                                            <div class="ld_tooltip" id="emailToolTip" translate>lblEmailcannotbefound
+                                            </div>
+                                            <span class="icon_tickcross" style="float: left;" id="emailTickRight"><img alt=""
+                                                    src="../../../assets/images/checkmark2x.png" /></span>
+                                            <span class="icon_tickcross" style="float: left;" id="emailTickWrong"><img alt=""
+                                                    src="../../../assets/images/invalidcross2x.png" /></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row text-center mt-25">
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                        <label class="col-xs-8 col-sm-10 label-text nopadding"
+                                            translate>lblPasscode</label>
+                                        <div class="col-xs-2 col-sm-1 responsive-hide">&nbsp;</div>
+                                    </div>
+
+                                    <div class="row text-center">
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                        <div class="col-xs-8 col-sm-10 nopadding">
+                                            <div class="row text-center">
+                                                <div class="col-xs-6 col-sm-3 mb-10"
+                                                    [ngClass]="{ 'has-error': ((loginForm.get('passcode1').invalid) && (loginForm.get('passcode1').touched))}">
+                                                    <input type="number" #passcode1 formControlName="passcode1"
+                                                        class="form-control text-center" onKeyPress="if(this.value.length==1) return false;" placeholder=""
+                                                        (keyup)="nextFocus('2', $event)">
+                                                </div>
+                                                <div class="col-xs-6 col-sm-3 mb-10"
+                                                    [ngClass]="{ 'has-error': ((loginForm.get('passcode2').invalid) && (loginForm.get('passcode2').touched))}">
+                                                    <input type="number" #passcode2 formControlName="passcode2"
+                                                        class="form-control text-center" onKeyPress="if(this.value.length==1) return false;" placeholder=""
+                                                        (keyup)="nextFocus('3', $event)">
+                                                </div>
+                                                <div class="col-xs-6 col-sm-3 mb-10"
+                                                    [ngClass]="{ 'has-error': ((loginForm.get('passcode3').invalid) && (loginForm.get('passcode3').touched))}">
+                                                    <input type="number" #passcode3 formControlName="passcode3"
+                                                        class="form-control text-center" onKeyPress="if(this.value.length==1) return false;" placeholder=""
+                                                        (keyup)="nextFocus('4', $event)">
+                                                </div>
+                                                <div class="col-xs-6 col-sm-3 mb-10"
+                                                    [ngClass]="{ 'has-error': ((loginForm.get('passcode4').invalid) && (loginForm.get('passcode4').touched))}">
+                                                    <input type="number" #passcode4 formControlName="passcode4"
+                                                        class="form-control text-center" onKeyPress="if(this.value.length==1) return false;" placeholder=""
+                                                        (keyup)="nextFocus('5', $event)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-2 col-sm-1">
+                                            <div class="ld_tooltip" id="passcodeToolTip" translate>msgIncorrectTryAgain
+                                            </div>
+                                            <span class="icon_tickcross" style="float: left;"
+                                                id="passcodeTickWrong"><img alt=""
+                                                    src="../../../assets/images/invalidcross2x.png" /></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row text-center notlogin mt-25">
+                                        <a class="col-sm-12 label_link" href="#" (click)="forgotPassword()"
+                                            translate>lblForgotemailorpasscode</a>
+                                    </div>
+
+                                    <div class="row text-center notlogin mt-25">
+                                        <div class="col-xs-2 col-sm-1"></div>
+                                        <div class="col-xs-8 col-sm-10">
+                                            <button class="globalButton" type="submit" [disabled]="!loginForm.valid"
+                                                translate>lblLOGIN</button>
+                                        </div>
+                                        <div class="col-xs-2 col-sm-1"></div>
+                                    </div>
+
+                                    <div class="row text-center mt-25">
+                                        <span class="col-sm-12 label_link" href="#" (click)="navigateRegister()"><strong
+                                                translate>lblREGISTER</strong></span>
+                                    </div>
+
+                                    <div class="row text-center mt-25 responsive-hide">
+                                        <div class="col-sm-12">
+                                            <h2>&nbsp;</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2"></div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->

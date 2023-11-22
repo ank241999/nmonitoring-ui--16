@@ -1,0 +1,75 @@
+@import '../../styles/_variables';
+@import '../../styles/_mixins';
+
+.alert-modal {
+
+
+  .alert-model-close {
+    background: none;
+    border: 0px none;
+    cursor: pointer;
+    font-size: 26px;
+    margin-top: -10px;
+    outline: none;
+  }
+
+  .alert-modal-title {
+    color: $libertyBlue;
+    background-color: #FFFB61;
+    margin: 0px;
+    font-family: Arial;
+    font-size: 20px;
+    height: 62px;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .alert-modal-text {
+    color: $grey8;
+    display: block;
+    text-align: center;
+  }
+
+  .alert-modal-input {
+    color: $tableHeaderColor;
+    font-size: 16px;
+    font-weight: bold;
+    min-height: 50px;
+    border-radius: 0px;
+  }
+
+  .fa-exclamation-triangle {
+    color: red;
+  }
+  
+  .fa-exclamation-triangle{
+    font-size: 20px;
+  }
+
+
+  .alert-modal-buttons {
+
+    justify-content: center;
+    margin-bottom: 20px;
+
+
+    .alert-modal-button {
+      @include button($white, $libertyBlue, $libertyBlue);
+      border-radius: 5px !important;
+      height: 75px;
+      width: 75px;
+      font-size: 16px;
+
+
+      &.alert-modal-button-success {
+        @include button($white, $libertyBlue, $libertyBlue);
+        margin-right: 10px;
+      }
+
+      &.alert-modal-button-failure {
+        @include button($white, $libertyBlue, $libertyBlue);
+      }
+    }
+  }
+}

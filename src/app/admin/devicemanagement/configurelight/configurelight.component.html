@@ -1,0 +1,222 @@
+<div class="inputWrapper addtablet">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">
+                <div class="row mb-15" style="margin-left: -45px; margin-right: -45px; min-height: 37px;">
+                    <div class="col-xs-10">&nbsp;</div>
+                    <div class="col-xs-2 text-right">
+                        <img alt="" src="../../../assets/images/closescreen_icon.jpg" (click)="onScreenClose()"
+                            style="cursor: pointer;" />
+                    </div>
+                </div>
+                <header class="row title pd-left-75">
+                    <div class="col-xs-11" style="text-align: center !important;">
+                        <h2 class="main-title" style="text-align: center !important;">Configure Lights ({{deviceName}})
+                        </h2>
+                    </div>
+                </header>
+                <!-- <hr class="line"> -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        <form class="form-horizontal" [formGroup]="form" (ngSubmit)="onSubmit()"
+                            (input)="updateProgress()" (change)="updateProgress()" (reset)="updateProgress()">
+                            <div class="form-group">
+                                <div class="row mt-12">
+                                    <div class="col-xs-4">&nbsp;</div>
+                                    <div class="col-xs-4" style="border: 1px solid #143345; border-radius: 5px;">
+                                        <div
+                                            [ngClass]="{ 'has-error': ((form.get('serialNoRight').invalid) && (form.get('serialNoRight').touched)) }">
+                                            <label class="form-label form-label-big col-sm-12"
+                                                [attr.for]="'serialNoRight'"> </label>
+                                            <!-- <input class="form-control alert-modal-input" type="text"
+                            placeholder="{{'addTypehere' | translate}}" formControlName="name"> -->
+
+                                            <label
+                                                style="font-size: 10px; color: #143345; text-align: left; font-weight: bold !important;;">Right
+                                                Light
+                                                : Select serial
+                                                number from drop down </label>
+                                            <select class="form-control" formControlName="serialNoRight"
+                                                [id]="'serialNoRight'" #t>
+                                                <option value="">Select</option>
+                                                <option *ngFor="let item of serialNosRight" [value]="item">
+                                                    {{ item }}
+                                                </option>
+                                            </select>
+                                            <div class="col-xs-7" style="text-align: right; margin: 10px 0 10px 0;">
+                                                <button class="globalButton figmabtnsqr72"
+                                                    (click)="validateSerialNo('RIGHT','serialNoRight'); form.valid;"
+                                                    style="width: 45px !important; height: 45px !important;border-radius: 5px !important;"
+                                                    [disabled]="disableTestButtonRight">
+                                                    <span class="fa-stack">
+                                                        <i class="fa fa-check fa-stack-2x" aria-hidden="true"
+                                                            style="color: #ffffff;"></i>
+                                                    </span>
+                                                    <p style="font-size:10px;">TEST</p>
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-5"
+                                                style="text-align: right; padding: 45px 0 0 0; font-weight: bold !important;">
+                                                <!-- Step {{this.stepSerial+1}} of 3 -->
+                                                Step 1 of 3
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4">&nbsp;</div>
+                                </div>
+                                <div class="row mt-15">
+                                    <div class="col-xs-4">&nbsp;</div>
+                                    <div class="col-xs-4" style="border: 1px solid #143345; border-radius: 5px;">
+                                        <div
+                                            [ngClass]="{ 'has-error': ((form.get('serialNoLeft').invalid) && (form.get('serialNoLeft').touched)) }">
+                                            <label class="form-label form-label-big col-sm-12"
+                                                [attr.for]="'serialNoLeft'"> </label>
+                                            <!-- <input class="form-control alert-modal-input" type="text"
+                            placeholder="{{'addTypehere' | translate}}" formControlName="name"> -->
+
+                                            <label
+                                                style="font-size: 10px; color: #143345; text-align: left; font-weight: bold !important;">Left
+                                                Light
+                                                : Select serial
+                                                number from drop down </label>
+                                            <select class="form-control" formControlName="serialNoLeft"
+                                                [id]="'serialNoLeft'" #t>
+                                                <option value="">Select</option>
+                                                <option *ngFor="let item of serialNosLeft" [value]="item">
+                                                    {{ item }}
+                                                </option>
+                                            </select>
+                                            <div class="col-xs-7" style="text-align: right; margin: 10px 0 10px 0;">
+                                                <button class="globalButton figmabtnsqr72"
+                                                    (click)="validateSerialNo('LEFT','serialNoLeft'); form.valid;"
+                                                    style="width: 45px !important; height: 45px !important;border-radius: 5px !important;"
+                                                    [disabled]="disableTestButtonLeft">
+                                                    <!--[disabled]="disableTestButtonLeft"-->
+                                                    <span class="fa-stack">
+                                                        <i class="fa fa-check fa-stack-2x" aria-hidden="true"
+                                                            style="color: #ffffff;"></i>
+                                                    </span>
+                                                    <p style="font-size:10px;">TEST</p>
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-5"
+                                                style="text-align: right; padding: 45px 0 0 0; font-weight: bold !important;">
+                                                <!-- Step {{this.stepSerial+1}} of 3 -->
+                                                Step 2 of 3
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4">&nbsp;</div>
+                                </div>
+                                <div class="row mt-12">
+                                    <div class="col-xs-4">&nbsp;</div>
+                                    <div class="col-xs-4"
+                                        style="border: 1px solid #143345; border-radius: 5px; margin-top:15px !important;">
+                                        <div
+                                            [ngClass]="{ 'has-error': ((form.get('serialNoTop').invalid) && (form.get('serialNoTop').touched)) }">
+                                            <label class="form-label form-label-big col-sm-12"
+                                                [attr.for]="'serialNoTop'"> </label>
+                                            <!-- <input class="form-control alert-modal-input" type="text"
+                            placeholder="{{'addTypehere' | translate}}" formControlName="name"> -->
+
+                                            <label
+                                                style="font-size: 10px; color: #143345; text-align: left; font-weight: bold !important;">Top
+                                                Light
+                                                : Select serial
+                                                number from drop down </label>
+                                            <select class="form-control" formControlName="serialNoTop"
+                                                [id]="'serialNoTop'" #t>
+                                                <option value="">Select</option>
+                                                <option *ngFor="let item of serialNosTop" [value]="item">
+                                                    {{ item }}
+                                                </option>
+                                            </select>
+                                            <div class="col-xs-7" style="text-align: right; margin: 10px 0 10px 0;">
+                                                <button class="globalButton figmabtnsqr72"
+                                                    (click)="validateSerialNo('TOP','serialNoTop'); form.valid;"
+                                                    style="width: 45px !important; height: 45px !important;border-radius: 5px !important;"
+                                                    [disabled]="disableTestButtonTop">
+                                                    <!--[disabled]="disableTestButtonTop"-->
+                                                    <span class="fa-stack">
+                                                        <i class="fa fa-check fa-stack-2x" aria-hidden="true"
+                                                            style="color: #ffffff;"></i>
+                                                    </span>
+                                                    <p style="font-size:10px;">TEST</p>
+                                                </button>
+                                            </div>
+                                            <div class="col-xs-5"
+                                                style="text-align: right; padding: 45px 0 0 0; font-weight: bold !important;">
+                                                <!-- Step {{this.stepSerial+1}} of 3 -->
+                                                Step 3 of 3
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4">&nbsp;</div>
+                                </div>
+                                <div class="row mt-12">
+                                    <!-- <div class="col-xs-2">&nbsp;</div> -->
+
+                                    <div class="col-xs-9"
+                                        style="text-align: right; margin: 10px 0 10px 0; padding-left: 0px !important;">
+                                        <button class="globalButton figmabtnsqr72"
+                                            (click)="resetSerialNo(); form.valid;"
+                                            style="width: 45px !important; height: 45px !important;border-radius: 5px !important;">
+                                            <span class="fa-stack">
+                                                <i class="fa fa-refresh fa-stack-2x" aria-hidden="true"
+                                                    style="color: #ffffff;"></i>
+                                            </span>
+                                            <p style="font-size:10px;">RESET</p>
+                                        </button>
+                                    </div>
+                                    <div class="col-xs-2" style="text-align: left; padding: 10px 0 0 0; float: left;">
+                                        <button class="globalButton figmabtnsqr72"
+                                            (click)="onScreenClose(); form.valid;"
+                                            style="width: 45px !important; height: 45px !important; border-radius: 5px !important;">
+                                            <!--[disabled]="nextButtonEnable"-->
+                                            <span class="fa-stack">
+                                                <i class="fa fa-arrow-right fa-stack-2x" aria-hidden="true"
+                                                    style="color: #ffffff;"></i>
+                                            </span>
+                                            <p style="font-size:10px;">DONE</p>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="alert-modal-buttons mt-15">
+                                    <div class="col-xs-3">&nbsp;</div>
+                                    <div class="col-xs-10" style="text-align: right;">
+                                        <!-- <button class="globalButton figmabtnsqr72" (click)="validateFields(); form.valid;"
+                        style="width: 65px !important; height: 65px !important;">
+                        <span class="fa-stack">
+                            <i class="fa fa-check fa-stack-2x" aria-hidden="true" style="color: #ffffff;"></i>
+                        </span>
+                        <p style="font-size:12px;">NEXT</p>
+                    </button> -->
+
+                                        <!-- <input type="submit" class="btn alert-modal-button globalButton"
+                        (click)="validateFields(); form.valid;" [disabled]="!form.valid" value="ADD"> -->
+                                    </div>
+                                    <!-- <div class="col-xs-3">&nbsp;</div> -->
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="alert-modal">
+    <div class="row">
+        <div>
+            <h4 class="alert-modal-title" translate>Configure Lights
+                <img src="../../../assets/images/closescreen_icon.jpg" (click)="onScreenClose('')"
+                    style="cursor: pointer;border: solid 0px;height: 20px; width: 20px;margin-right:10px; float: right;" />
+            </h4>
+        </div>
+    </div>
+
+</div> -->

@@ -1,0 +1,371 @@
+<div class="inputWrapper systeminformation">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">
+                <div class="row mb-15 sysinfo-row">
+                    <div class="col-xs-11 text-right">
+                    </div>
+                    <div class="col-xs-1 text-right">
+                        <img alt="" src="../../../assets/images/closescreen_icon.jpg" style="cursor: pointer;"
+                            (click)="onScreenClose()" />
+                    </div>
+                    <div class="innercard-wrapper">
+                        <header class="row title">
+                            <div class="col-xs-1"></div>
+                            <div class="col-xs-10 heading-col">
+                                <h2 class="main-title" translate>sysinformation</h2>
+                            </div>
+                            <div class="col-xs-1"></div>
+                        </header>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-xs-1 col-sm-1"></div>
+                                <div class="col-xs-7 col-sm-7" style="padding-left: 25px">
+                                    <ul class="tab-slider--tabs tab-slide">
+                                        <li class="tab-slider--trigger" [class.active]="viewMode == 'Tab1'" rel="Tab1"
+                                            (click)="viewMode ='Tab1'">
+                                            Devices</li>
+                                        <li class="tab-slider--trigger" [class.active]="viewMode == 'Tab2'" rel="Tab2"
+                                            [ngClass]="{'disabled': this.iSystemInfo?.length == 0}"
+                                            (click)="viewMode ='Tab2'; getdata('hexwave.cfg')">
+                                            Software Information</li>
+                                    </ul>
+                                </div>
+                                <div class="col-xs-4 col-sm-4"></div>
+                            </div>
+                            <div class=" row tab-slider--container"
+                                *ngIf="leftdeviceName!='No Device' && rightdeviceName!='No Device'"
+                                [ngSwitch]="viewMode">
+                                <!--Tab 1-->
+                                <div id="Tab1" *ngSwitchCase="'Tab1'">
+                                    <div class="container-fluid">
+                                        <div class="row leftdeviceName">
+                                            <div class="col-xs-12">
+                                                <form class="form-horizontal" [formGroup]="systemInformationForm">
+                                                    <div class="col-lg-1"></div>
+                                                    <div class="col-lg-5">
+                                                        <div class="row mt-25">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-12 label-text"
+                                                                        translate>sysinfohexwavehostidprimary</label>
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="HEXWAVE_HOST_ID"
+                                                                            placeholder="HEXWAVE HOST ID">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-25">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-12 label-text"
+                                                                        translate>sysinfohexwavehostidpaired</label>
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="HEXWAVE_HOST_ID_PAIRED"
+                                                                            placeholder="HEXWAVE HOST ID PAIRED">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-5 mb-30">
+                                                        <div class="row mt-25">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-12 label-text"
+                                                                        translate>sysinfohexexteripprimary</label>
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="HEXWAVE_EXTERNAL_IP"
+                                                                            placeholder="HEXWAVE EXTERNAL IP">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-25">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-12 label-text"
+                                                                        translate>sysinfohexexterippaired</label>
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="HEXWAVE_EXTERNAL_IP_PAIRED"
+                                                                            placeholder="HEXWAVE EXTERNAL IP PAIRED">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-1"></div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Tab 2-->
+                                <div id="Tab2" *ngSwitchCase="'Tab2'">
+                                    <div class="container-fluid">
+                                        <div class="row rightdeviceName">
+                                            <div class="row mt-10">
+                                                <div class="col-xs-12 col-sm-12">
+                                                    <div class="col-lg-1 col-sm-1"></div>
+                                                    <div class="col-lg-5 col-sm-5">
+                                                        <ul class="tab-slider--tabs tab-slide">
+                                                            <li class="tab-slider--trigger-device">
+                                                                {{leftdeviceName}}</li>
+                                                            <li class="tab-slider--trigger-device">
+                                                                {{rightdeviceName}}</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-lg-5 col-sm-5"></div>
+                                                    <div class="col-lg-1 col-sm-1"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12">
+                                                <form class="form-horizontal rightdeviceName"
+                                                    [formGroup]="systemInformationForm">
+                                                    <div class="col-lg-1"></div>
+                                                    <div class="col-lg-5">
+                                                        <div class="row mt-25" *ngIf="showInputField">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-12"
+                                                                        translate>sysinfohexwavehostid</label>
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="HEXWAVE_HOST_ID"
+                                                                            placeholder="HEXWAVE HOST ID">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-25" *ngIf="showInputField">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-12 label-text"
+                                                                        translate>sysinfohexwavehostidpaired</label>
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="HEXWAVE_HOST_ID_PAIRED"
+                                                                            placeholder="HEXWAVE HOST ID PAIRED">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-25">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-12"
+                                                                        translate>sysinforepo</label>
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="HEXWAVE_REPO"
+                                                                            placeholder="HEXWAVE REPO">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-25">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-12"
+                                                                        translate>sysinfobackimgtag</label>
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="BACKEND_IMAGE_TAG"
+                                                                            placeholder="BACKEND IMAGE TAG">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-25">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-12"
+                                                                        translate>sysinfoaiimgtag</label>
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="AI_IMAGE_TAG"
+                                                                            placeholder="AI IMAGE TAG">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-25">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-12"
+                                                                        translate>sysinfohextoalgo</label>
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="ALGORITHMS_IMAGE_TAG"
+                                                                            placeholder="ALGORITHMS IMAGE TAG">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-25">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-12"
+                                                                        translate>sysinfodowntoimg</label>
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="DOWNLOAD_IMAGES"
+                                                                            placeholder="DOWNLOAD IMAGES">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-5">
+                                                        <div class="row mt-25" *ngIf="showInputField">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-12"
+                                                                        translate>sysinfohexexterip</label>
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="HEXWAVE_EXTERNAL_IP"
+                                                                            placeholder="HEXWAVE EXTERNAL IP">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-25" *ngIf="showInputField">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-12 label-text"
+                                                                        translate>sysinfohexexterippaired</label>
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="HEXWAVE_EXTERNAL_IP_PAIRED"
+                                                                            placeholder="HEXWAVE EXTERNAL IP PAIRED">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="row mt-25">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-12"
+                                                                        translate>sysinfohexpipelineimgtag</label>
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="PIPELINE_IMAGE_TAG"
+                                                                            placeholder="PIPELINE IMAGE TAG">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-25">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-12"
+                                                                        translate>sysinfologgimgtag</label>
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="LOGGING_IMAGE_TAG"
+                                                                            placeholder="LOGGING IMAGE TAG">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-25">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-12 "
+                                                                        translate>sysinfoimgtag</label>
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="IMAGE_TAG"
+                                                                            placeholder="IMAGE TAG">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-25">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-12 "
+                                                                        translate>sysinfohexhealtdigno
+                                                                    </label>
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="HEXWAVE_HEALTHCHECK_DIAGNOSTIC_TAG"
+                                                                            placeholder="HEXWAVE HEALTHCHECK DIAGNOSTIC
+                                                                            TAG">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-25">
+                                                            <div class="col-lg-12">
+                                                                <div class="form-group">
+                                                                    <label class="col-sm-12 "
+                                                                        translate>sysinfo_client_instace
+                                                                    </label>
+                                                                    <div class="col-sm-12">
+                                                                        <input type="text" class="form-control"
+                                                                            formControlName="CLIENT_INSTANCE_NAME"
+                                                                            placeholder="{{'sysinfo_client_instace' | translate}}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-1"></div>
+                                                    <div class="row mt-20"></div>
+                                                    <div class="row mt-20"></div>
+                                                    <div class="row mt-20">
+                                                        <div class="col-lg-7 col-sm-7"></div>
+                                                        <div class="col-lg-5 col-sm-5">
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-sm-6"></div>
+                                                                <div class="col-lg-3 col-sm-3">
+                                                                    <div class="text-center">
+                                                                        <button class="globalButton" type="button"
+                                                                            style="font-size: 16px;"
+                                                                            (click)="saveConfigDataIp('hexwave.cfg')">
+                                                                            <span>
+                                                                                <i class="fa fa-floppy-o fa-2x btnIcon"
+                                                                                    aria-hidden="true"></i>
+                                                                            </span>
+                                                                            <p style="margin-top: 10px;">Save</p>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-3 col-sm-3">
+                                                                    <div class="text-center">
+                                                                        <button class="globalButton" type="button"
+                                                                            style="font-size: 16px;"
+                                                                            (click)="saveConfigDataIp('hexwave.cfg');rebootDevice()">
+                                                                            <span>
+                                                                                <i class="fa fa-refresh fa-2x btnIcon"
+                                                                                    aria-hidden="true"></i>
+                                                                            </span>
+                                                                            <p class="buttonName">Save and
+                                                                                Reboot</p>
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

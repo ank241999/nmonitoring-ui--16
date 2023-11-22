@@ -1,0 +1,197 @@
+<div class="main-navbar-container" style="width: 100%; height: 60px; z-index: 999;">
+    <div class="row" style="width: 100%;">
+        <div class="col-lg-3 col-xs-3">&nbsp;</div>
+        <div class="col-lg-6 col-xs-5">
+            <div class="branding-col">
+                <div class="brand-wrapper" style="text-align: center;">
+                    <img class="brand-logo" src="kong/location/logo"
+                        onerror="this.onerror=null; this.src='/assets/images/Liberty-Defense-Logo-.png'" alt="Logo"
+                        height="55">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-4">&nbsp;</div>
+    </div>
+</div>
+<div class="inputWrapper">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">
+                <div class="register_wrapper">
+
+                    <form [formGroup]="registerForm" class="form-horizontal login-form" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="row text-center responsive-hide">
+                                    <div class="col-sm-12">
+                                        <h2>&nbsp;</h2>
+                                    </div>
+                                </div>
+                                <div class="row text-center">
+                                    <div class="col-sm-12">
+                                        <h2 style="font-size: 36px; font-weight: bold;" translate>lblRegisterHeading
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="scrollbar scrollbar-default" style="width: -webkit-fill-available;">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-8">
+
+                                    <div class="row text-center mt-25">
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                        <label class="col-xs-8 col-sm-10 label-text nopadding"
+                                            translate>lblFirstName</label>
+                                        <div class="col-xs-2 col-sm-1 responsive-hide">&nbsp;</div>
+                                    </div>
+
+                                    <div class="row text-center">
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                        <div class="col-xs-8 col-sm-10 nopadding" id="email_input_wrapper"
+                                            [ngClass]="{ 'has-error': ((registerForm.get('firstName')?.invalid) && (registerForm.get('firstName')?.touched))}">
+                                            <input id="firstName" type="text" class="form-control"
+                                                placeholder="{{'lblTypehere' | translate}}" formControlName="firstName"
+                                                #firstName>
+                                        </div>
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                        <div class="col-sm-10 responsive-hide validation-errors has-error"
+                                            style="padding: 0px 0 0 0px; text-align: left;">
+                                            <ng-container *ngFor="let validation of validationMessages.firstName">
+                                                <div class="help-block"
+                                                    *ngIf="registerForm.get('firstName')?.hasError(validation.type) && (registerForm.get('firstName')?.dirty || registerForm.get('firstName')?.touched)">
+                                                    {{ validation.message }}
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+
+                                    <div class="row text-center mt-25">
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                        <label class="col-xs-8 col-sm-10 label-text nopadding"
+                                            translate>lblLastName</label>
+                                        <div class="col-xs-2 col-sm-1 responsive-hide">&nbsp;</div>
+                                    </div>
+
+                                    <div class="row text-center">
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                        <div class="col-xs-8 col-sm-10 nopadding" id="email_input_wrapper">
+                                            <input type="text" class="form-control"
+                                                placeholder="{{'lblTypehere' | translate}}" formControlName="lastName">
+                                        </div>
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                    </div>
+
+                                    <div class="row text-center mt-25">
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                        <label class="col-xs-8 col-sm-10 label-text nopadding"
+                                            translate>lblEmail</label>
+                                        <div class="col-xs-2 col-sm-1 responsive-hide">&nbsp;</div>
+                                    </div>
+
+                                    <div class="row text-center">
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                        <div class="col-xs-8 col-sm-10 nopadding" id="email_input_wrapper"
+                                            [ngClass]="{ 'has-error': ((registerForm.get('email')?.invalid) && (registerForm.get('email')?.touched))}">
+                                            <input type="text" class="form-control"
+                                                placeholder="{{'lblTypehere' | translate}}" formControlName="email">
+                                        </div>
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                        <div class="col-sm-10 responsive-hide validation-errors has-error"
+                                            style="padding: 0px 0 0 0px; text-align: left;">
+                                            <ng-container *ngFor="let validation of validationMessages.email">
+                                                <div class="help-block"
+                                                    *ngIf="registerForm.get('email')?.hasError(validation.type) && (registerForm.get('email')?.dirty || registerForm.get('email')?.touched)">
+                                                    {{ validation.message }}
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+
+                                    <div class="row text-center mt-25">
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                        <label class="col-xs-8 col-sm-10 label-text nopadding"
+                                            translate>lblConfirmEmail</label>
+                                        <div class="col-xs-2 col-sm-1 responsive-hide">&nbsp;</div>
+                                    </div>
+
+                                    <div class="row text-center">
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                        <div class="col-xs-8 col-sm-10 nopadding" id="email_input_wrapper"
+                                            [ngClass]="{ 'has-error': ((registerForm.get('confirmEmail')?.invalid) && (registerForm.get('confirmEmail')?.touched))}">
+                                            <input type="text" class="form-control"
+                                                placeholder="{{'lblTypehere' | translate}}"
+                                                formControlName="confirmEmail" (focusout)="focusOut('email')"
+                                                appBlockCopyPaste>
+                                        </div>
+                                        <div class="col-xs-2 col-sm-1">
+                                            <div class="ld_tooltip email_tooltip" id="emailToolTip" translate>
+                                                msgNotMatchTryAgain</div>
+                                            <span class="icon_tickcross" style="float: left;" id="emailTickRight"><img
+                                                    alt="" src="../../../assets/images/checkmark2x.png" /></span>
+                                            <span class="icon_tickcross" style="float: left;" id="emailTickWrong"><img
+                                                    alt="" src="../../../assets/images/invalidcross2x.png" /></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                        <div class="col-sm-10 responsive-hide validation-errors has-error"
+                                            style="padding: 0px 0 0 0px; text-align: left;">
+                                            <ng-container *ngFor="let validation of validationMessages.confirmemail">
+                                                <div class="help-block"
+                                                    *ngIf="registerForm.get('confirmEmail')?.hasError(validation.type) && (registerForm.get('confirmEmail')?.dirty || registerForm.get('confirmEmail')?.touched)">
+                                                    {{ validation.message }}
+                                                </div>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="color: red;text-align: center;">
+                                        <b>Note:-</b>
+                                        Initial Password will be same as "EMAIL".
+                                    </div>
+
+                                    <div class="row text-center notlogin mt-25">
+                                        <div class="col-xs-2 col-sm-1"></div>
+                                        <div class="col-xs-8 col-sm-10">
+                                            <button class="globalButton" type="submit"
+                                                [disabled]="!registerForm.valid"><i class="fa fa-user-plus fa-2x"
+                                                    aria-hidden="true"></i>
+                                                <p translate style="padding-top: 5px;">lblreg</p>
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-8 col-sm-1"></div>
+                                    </div>
+
+                                    <div class="row text-center notlogin mt-25 hr_line_wrapper">
+                                        <h2 class="col-sm-12 hr_line"><span translate>lblAlreadyAcc</span></h2>
+                                    </div>
+
+                                    <div class="row text-center mt-25">
+                                        <a class="col-sm-12 label_link" href="#" (click)="navigateLogin()"><strong
+                                                translate>lblLog</strong></a>
+                                    </div>
+
+                                    <div class="row text-center mt-25 responsive-hide">
+                                        <div class="col-sm-12">
+                                            <h2>&nbsp;</h2>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-sm-2"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

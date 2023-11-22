@@ -1,0 +1,309 @@
+<div class="inputWrapper activitymonitoring" style="padding: 0 0 !important;">
+  <div class="row inner_activitymonitoring">
+    <form class="form-horizontal" [formGroup]="form" (ngSubmit)="saveLog()">
+      <div class="col-lg-12">
+        <!-- <div class="row">
+				<div class="col-lg-12">
+					<div class="row activity_header">
+						<div class="col-lg-6 col-xs-12" style="border-bottom: solid 1px #000000;">
+							<h1 class="text-right responsice-center">GATE: <span>{{gate}}</span></h1>
+						</div>
+						<div class="col-lg-6 col-xs-12" style="border-bottom: solid 1px #000000;">
+							<h1 class="text-left responsice-center">LANE: <span>{{lane}}</span></h1>
+						</div>
+					</div>
+				</div>
+			</div> -->
+        <div class="row">
+          <div class="col-lg-9 outer_canvas_wrapper">
+            <div class="col-lg-12 canvas_wrapper">
+              <div class="col-lg-6 brs-1">
+                <div class="row">
+                  <div class="col-lg-12">&nbsp;</div>
+                  <div class="col-lg-12">
+                    <canvas class="canvasBaseImg" no-bounce id="canvasfront" #canvasfront translate>
+                      lblSorry
+                    </canvas>
+                    <div class="txt_side_front_left">L</div>
+                    <div class="txt_side_front_right">R</div>
+                    <div class="txt_view_title_front text_front" translate>
+                      lblFRONT</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div *ngIf="screenerMessageToShow">
+                <div class="red-box">
+                  <p>{{screenerMessageToShow}}</p>
+                </div>
+              </div> -->
+
+              <div *ngIf="screenerMessageToShow">
+                <div class="red-box">
+                  <p>{{ truncateText(screenerMessageToShow, 100) }}</p>
+                </div>
+              </div>
+
+              <div class="col-lg-6 bls-1">
+                <div class="row">
+                  <div class="col-lg-12">&nbsp;</div>
+                  <div class="col-lg-12">
+                    <canvas class="canvasBaseImg" no-bounce id="canvasback" #canvasback translate>
+                      lblSorry
+                    </canvas>
+                    <div class="txt_side_back_left">L</div>
+                    <div class="txt_side_back_right">R</div>
+                    <div class="txt_view_title_back text_back" translate>
+                      lblBACK</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 activityRightPanel" id="dv_rightpanel">
+            <!-- top part of side menu -->
+            <div class="currentstatus_wrapper pd-top-15 col-1" style="border-bottom: 1px solid #d8d8d8;">
+              <div class="col-1">
+                <h1>SYSTEM STATUS</h1><br>
+                <h2 style="font-size: 12px; margin-top:-28px;padding-left: 28px;font-weight: bold;">
+                  Scanner:
+                  <span style="color: #41FA3C;padding-left: 83px;" *ngIf="!this.isThreatFlag&&!this.isScanStopped"><img
+                      alt="" src="../../../assets/images/running-icon.png">Ready
+                  </span>
+                  <span style="color: #fcc419;padding-left: 83px;" *ngIf="this.isThreatFlag&&!this.isScanStopped"><img
+                      alt="" style="height: 20px;" src="../../../assets/images/scan.png">Scanning
+                  </span>
+                  <span style="color: red;padding-left: 83px;" *ngIf="this.isScanStopped"><i class="fa fa-ban"
+                      aria-hidden="true"></i>&nbsp;Stopped
+                  </span>
+                </h2>
+                <h2 style="font-size: 12px; margin-top:-8px;padding-left: 28px;font-weight: bold; cursor: pointer;">Scan
+                  Count:
+                  <!-- <span
+                    style="color: #CCCCCC;padding-left: 104px;">{{scancountstring}}&nbsp;
+                    <i class="fa fa-refresh scan_count float-right" (click)="resetscancount()"></i>
+                  </span> -->
+
+                  <span style="padding-left: 83px;">
+                    {{scancountstring}}
+                  </span>
+                  <img alt=""
+                    style="height: 20px;background-color: #F8F8F8;border-radius:5px;margin-left: 8px;cursor: pointer;"
+                    src="../../../assets/images/reset.png" (click)="resetscancount()">
+                </h2>
+              </div>
+              <div class="dtm">
+                <span style="color: #143345;padding-left: 30px;font-weight: bold;">
+                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                  {{ livetime | date: 'yyyy/MM/dd '}}&nbsp;
+                  <i class="fa fa-clock-o" aria-hidden="true"></i>
+                  {{ livetime | date: 'HH:mm:ss'}} hrs
+                </span>
+              </div>
+              <div class="threatstatus_wrapper row">
+                <div class="threatstatus_details col-lg-9 col-sm-10">
+                  <div class="recent-act-div" style="padding-left: 30px;margin-top: 2px;">
+                    <span class="activity-text" style="font-size: 14px;">Passenger Type: </span>
+                    <span>Standard</span>
+                  </div>
+                  <div class="recent-act-div" style="padding-left: 30px;">
+                    <span class="activity-text" style="font-size: 14px;">Scan Mode: </span>
+                    <span>PVS</span>
+                  </div>
+                  <div class="recent-act-div" style="padding-left: 30px;">
+                    <span class="activity-text" style="font-size: 14px;">Algorithm: </span>
+                    <span>{{ algorithmsTag }}</span>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- alarms -->
+            <div class="currentstatus_wrapper" style="border-bottom: 1px solid #d8d8d8;padding-bottom: 0px;">
+              <div class="row">
+                <div class="threatstatus_details col-lg-2 col-sm-2">
+                  <i class="fa fa-bell" aria-hidden="true"
+                    style="font-size: 25px;margin-top: 12px;margin-left: 10px; color: #143345;"></i>
+                </div>
+                <div class="threatstatus_details col-lg-8 col-sm-8">
+                  <p class="alarm" style="padding-left: 0px !important;color: #143345;">
+                    Alarms : {{ totalalarms }}
+                  </p>
+                </div>
+                <div class="threatstatus_details col-lg-2 col-sm-2"></div>
+              </div>
+            </div>
+
+            <!-- scan result -->
+            <div class="currentstatus_wrapper" style="border-bottom: 1px solid #d8d8d8;padding-bottom: 0px;">
+              <p class="lbl_recent_activity scan_b" style="padding-left: 0px !important;">
+                SCAN RESULT
+              </p>
+              <div class="threatstatus_wrapper row">
+                <div class="threatstatus_img col-lg-2 col-sm-2 text-center">
+                  <i class="fa fa-bug bugicon bugm" aria-hidden="true"
+                    *ngIf="threatType=='Cellphone'||threatType=='Keys'||threatType=='Anomaly'||threatType=='Handgun'||threatType=='Rifle'||threatType=='Pipebomb'||threatType=='Knife'||threatType=='Threat'"></i>
+                  <img alt="" src="{{ selectedThreatStatusImage }}" class="md-card-image"
+                    style="height: 50px;width: 50px;" *ngIf="scanresult=='CLEAR'" />
+                </div>
+                <div class="threatstatus_details col-lg-10 col-sm-10">
+                  <div class="recent-act-div" style="margin-top: 12px;">
+                    <span class="activity-text" style="font-weight: normal;">STATUS: </span>
+                    <span>
+                      {{ scanresult }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- recent activity -->
+            <div class="pd-left-0 th_right_panel" style="background-color: #f8f8f8 !important;">
+              <!-- <div class="mat-elevation-z8 mat-elevation-z81">
+                <p class="lbl_recent_activity scan_b" style="padding-left: 0px !important;" translate>
+                  lblRecentActivity
+                </p>
+                <div class="recentactivity_list">
+                  <mat-table #table [dataSource]="dataSource" matSort matSortActive="timestamp" matSortDirection="desc">
+                    <ng-container matColumnDef="status">
+                      <td mat-cell *matCellDef="let row" class="mat-header-cell-custom threat-act text-center"
+                        id="img-{{ row.id }}" style="padding-left: 0px !important;">
+                        <div style="width: 60px;">
+                          <img alt="" src="{{ row.threatIcon }}" class="md-card-image" style="height: 25px;" />
+                        </div>
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="timestamp">
+                      <td id="{{ row.id }}" mat-cell *matCellDef="let row" class="mat-header-cell-custom threat-act"
+                        (click)="selectActivity(row.id)" style="width:220px;">
+                        <span class="activity-text" style="font-weight: 700;" translate>lblThreatType
+                        </span>
+                        <span class="activity-text-value" translate>{{ row.threatType }}
+                        </span>
+                        <div>
+                          <span class="activity-text" style="font-weight: 700;" translate>lblTime </span>
+                          <span class="activity-text-value" translate>{{
+                            row.time
+                            }}</span>
+                        </div>
+                      </td>
+                    </ng-container>
+                    <ng-container matColumnDef="actualResult">
+                      <td mat-cell *matCellDef="let row" class="mat-header-cell-custom threat-act text-center"
+                        id="img-s-{{ row.id }}" style="padding-left: 18px !important;">
+                        <div style="width: 60px;" *ngIf="row.actualResult==true" (click)="showlogdetail(row.id)">
+                          <img alt="" src="../../assets/images/logCorrect.png" class="md-card-image" style="height: 30px;" />
+                        </div>
+                        <div style="width: 60px;" *ngIf="row.actualResult==false" (click)="showlogdetail(row.id)">
+                          <img alt="" src="../../assets/images/logIncorrect.png" class="md-card-image" style="height: 30px;" />
+                        </div>
+                      </td>
+                    </ng-container>
+                    <mat-row style="background-color: #f8f8f8 !important;"
+                      *matRowDef="let row; columns: displayedColumns"></mat-row>
+                  </mat-table>
+                </div>
+                <mat-paginator [pageSize]="4" [pageSizeOptions]="[]" style="display: none;"></mat-paginator>
+              </div> -->
+              <div class="row dv_recentActivityThreat" id="dv_recentActivityThreat">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                  <button class="btn_clear" type="button" disabled (click)="continueActivity(1)">
+                    <i class=" fa fa-check" style="font-size: 30px;" aria-hidden="true"></i>
+                    CLEAR
+                  </button>
+                </div>
+                <div class="col-md-4"></div>
+              </div>
+              <div class="row dv_log" id="dv_log">
+                <div class="col-md-6">
+                  <button class="btn_clear" type="button" disabled (click)="continueActivity(1)"><i class="fa fa-check"
+                      style="font-size: 30px;" aria-hidden="true"></i> CLEAR </button>
+                </div>
+                <div class="col-md-6">
+                  <button class="btn_logactual" type="button" (click)="showLogSection()">
+                    <span><i class="fa fa-file-text-o" style="font-size: 20px;margin-top: 10px;" aria-hidden="true"></i>
+                    </span>
+                    <p> LOG RESULT </p>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div class="modal dv_actual_logs" id="dv_actual_logs">
+  <div class="modal-content popup_m">
+
+    <!-- Modal Header -->
+    <div class="modal-header po_title">
+      <h1 class="modal-title">LOG ACTUAL RESULT</h1>
+    </div>
+
+    <!-- Modal body -->
+    <div class="modal-body">
+      <table aria-describedby="">
+        <thead>
+          <tr>
+            <th style="display: none;">Hidden Header</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let threat of logactualthreat; let i = index">
+            <td style="width: 5%;">
+              <input type='checkbox' (change)="onselectthreattype($event.target.checked,i,'actualresult')"
+                name="result" />
+            </td>
+            <td>{{ threat.threattype }}</td>
+            <td>
+              <mat-select placeholder="" (selectionChange)="onselectthreattype($event.value,i,'threattype')">
+                <mat-option *ngFor="let type of threatTypes" [disabled]="islogdataEnabled[i]" [value]="type.value">{{
+                  type.value }}
+                </mat-option>
+              </mat-select>
+            </td>
+            <td>{{ threat.weapon }}</td>
+            <td>
+              <mat-select placeholder="" (selectionChange)="onselectthreattype($event.value,i,'weapon')" multiple>
+                <mat-option *ngFor="let weapon of typeOfWeapon" [disabled]="islogdataEnabled[i]" [value]="weapon.value">
+                  {{ weapon.value }}
+                </mat-option>
+              </mat-select>
+            </td>
+            <td style="width: 20%;">{{ threat.location }}</td>
+            <td style="width: 20%;">
+              <mat-select placeholder="" (selectionChange)="onselectthreattype($event.value,i,'location')" multiple>
+                <mat-option *ngFor="let location of threatLocations" [disabled]="islogdataEnabled[i]"
+                  [value]="location.value">{{ location.value }}
+                </mat-option>
+              </mat-select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="col-md-12">&nbsp;</div>
+      <textarea class="form-control" style="border: solid 2px #ccc;" [(ngModel)]="note" placeholder="Add Note...."
+        rows="1" maxlength="255"></textarea>
+    </div>
+
+    <!-- Modal footer -->
+    <div class="modal-footer">
+      <div class="col-md-12">
+        <button type="button" class="btn_cancel" (click)="continueActivity(2)">
+          <i class="fa fa-times icon_m" aria-hidden="true"></i><br />
+          CANCEL
+        </button>&nbsp;
+        <button type="button" class="btn_cancel" (click)="saveLog()">
+          <i class="fa fa-file-text-o icon_m" aria-hidden="true"></i><br />
+          SAVE
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

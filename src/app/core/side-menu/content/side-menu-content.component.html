@@ -1,0 +1,312 @@
+<app-condense #condenseMenu [ngClass]="condenseMenu.menuState">
+    <!-- User section -->
+
+    <div> <a class="simple-menu-item" (click)="toggleSideMenu();showProfile();"
+            routerLinkActive="active">
+            <span><i class="fa fa-user-circle fa-2x" aria-hidden="true"
+                    style="line-height:40px;"></i>&nbsp;&nbsp;</span>
+            <span class="menu-item-title menu-lable">{{logggedInUser}}</span>
+        </a>
+    </div>
+
+    <!-- Opertor section -->
+    <mat-expansion-panel class="expandable-menu-item" #utilsExpandableSection="routerLinkActive" [expanded]="false"
+        [routerLinkActive]="['active']" *ngIf="checkAcccessLevel('activitymonitoring')">
+        <mat-expansion-panel-header>
+            <div class="item-header-content">
+                <mat-panel-title class="expandable-item-title">
+                    <span><img alt="" class="action-icon" src="../../../../assets/images/opertor.png"
+                            style="width:24px; height: 24px;" />&nbsp;&nbsp;</span>
+                    <span class="menu-lable">Operator Control Panel</span>
+                </mat-panel-title>
+                <!-- <mat-panel-description class="expandable-item-description"
+                        *ngIf="checkAcccessLevel('calibrationservice')">
+                        OCP, Force Clear
+                    </mat-panel-description> -->
+            </div>
+        </mat-expansion-panel-header>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLink]="['/admin/activitymonitoring']" *ngIf="checkAcccessLevel('activitymonitoring')">
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title  sub-menu-lable">OCP</span>
+        </a>
+        <a class="expandable-sub-item" (click)="toggleSideMenu(); forceclear();" style="position: relative; text-transform: uppercase;
+            bottom: 0px;color: red" [routerLinkActive]="['active']" *ngIf="checkAcccessLevel('activitymonitoring')">
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title sub-menu-lable" style="color: red ;">Force Clear</span>
+        </a>
+        <a class="expandable-sub-item" (click)="toggleSideMenu(); stopScanning();" style="position: relative; text-transform: uppercase;
+            bottom: 0px;color: red" [routerLinkActive]="['active']" *ngIf="checkAcccessLevel('activitymonitoring')">
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title sub-menu-lable" style="color: red ;">Stop Scanning</span>
+        </a>
+        <a class="expandable-sub-item" (click)="toggleSideMenu(); resumeScanning();" style="position: relative; text-transform: uppercase;
+            bottom: 0px;color: red" [routerLinkActive]="['active']" *ngIf="checkAcccessLevel('activitymonitoring')">
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title sub-menu-lable" style="color: rgb(95, 235, 24) ;">Resume Scanning</span>
+        </a>
+    </mat-expansion-panel>
+
+    <!-- Calibration section -->
+    <mat-expansion-panel class="expandable-menu-item" #utilsExpandableSection="routerLinkActive" [expanded]="false"
+        [routerLinkActive]="['active']" *ngIf="checkAcccessLevel('calibrationservice')">
+        <!--*ngIf="istechnicianltd || istechniciancust || isAdmin">-->
+        <mat-expansion-panel-header>
+            <div class="item-header-content">
+                <mat-panel-title class="expandable-item-title">
+                    <span><img alt="" class="action-icon" src="../../../../assets/images/Calibration.png"
+                            style="width:24px; height: 24px;" />&nbsp;&nbsp;</span>
+                    <span class="menu-lable">
+                        Calibration Service</span>
+                </mat-panel-title>
+                <!--           <mat-panel-description class="expandable-item-description"
+                        *ngIf="checkAcccessLevel('calibrationservice')"><!--*ngIf="istechnicianltd || isAdmin">Air
+                        Calibration, Full Calibration, Offset Value
+                    </mat-panel-description>-->
+            </div>
+        </mat-expansion-panel-header>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLink]="['/admin/calibrationservice/fullcalibration']" *ngIf="checkAcccessLevel('fullcalibration')">
+            <!--*ngIf="istechnicianltd || isAdmin">-->
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title  sub-menu-lable">Full Calibration</span>
+        </a>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLink]="['/admin/calibrationservice/aircalibration']" *ngIf="checkAcccessLevel('aircalibration')">
+            <!--*ngIf="istechniciancust || isAdmin || istechnicianltd">-->
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title sub-menu-lable">Air Calibration</span>
+        </a>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLink]="['/admin/calibrationservice/offsetcalculation']"
+            *ngIf="checkAcccessLevel('offsetcalculation')">
+            <!--*ngIf="istechniciancust || isAdmin || istechnicianltd">-->
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title sub-menu-lable">Offset Value</span>
+        </a>
+    </mat-expansion-panel>
+
+    <!-- Threat and Device Status section -->
+    <a class="simple-menu-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+        [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/admin/dashboard']"
+        *ngIf="checkAcccessLevel('dashboard')">
+        <span> <i class="fa fa-bug  fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;</span>
+        <span class="menu-item-title menu-lable" translate>menuThreatandDeviceStatus</span>
+    </a>
+
+    <!-- User Management section -->
+    <mat-expansion-panel class="expandable-menu-item" #utilsExpandableSection="routerLinkActive" [expanded]="false"
+        [routerLinkActive]="['active']" *ngIf="checkAcccessLevel('accountmanagement')">
+        <mat-expansion-panel-header>
+            <div class="item-header-content">
+                <mat-panel-title class="expandable-item-title">
+                    <span><i class="fa fa-users fa-2x" aria-hidden="true"></i>&nbsp;&nbsp;</span>
+                    <span class="menu-lable" translate>menu_usermgmt</span>
+                </mat-panel-title>
+                <!-- <mat-panel-description class="expandable-item-description" translate>menu_usermgmt
+                </mat-panel-description> -->
+            </div>
+        </mat-expansion-panel-header>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{exact: false}" [routerLink]="['/admin/accountmanagement']"
+            *ngIf="checkAcccessLevel('accountmanagement')">
+            <span class="menu-item-title  sub-menu-lable" translate>menuAccountManagement</span>
+        </a>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/admin/roles']"
+            *ngIf="checkAcccessLevel('roles')">
+            <!-- <span class="icon-abbr">MO</span> -->
+            <span class="menu-item-title sub-menu-lable" translate>menu_accesslevel</span>
+        </a>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/admin/roles/capability']"
+            *ngIf="checkAcccessLevel('capability')">
+            <!-- <span class="icon-abbr">MO</span> -->
+            <span class="menu-item-title sub-menu-lable" translate>hd_capabilities</span>
+        </a>
+    </mat-expansion-panel>
+
+    <!-- Report section -->
+    <mat-expansion-panel class="expandable-menu-item" #utilsExpandableSection="routerLinkActive" [expanded]="false"
+        [routerLinkActive]="['active']" *ngIf="checkAcccessLevel('reports')">
+        <!--*ngIf="isAdmin">-->
+        <mat-expansion-panel-header>
+            <div class="item-header-content">
+                <mat-panel-title class="expandable-item-title">
+                    <span><img alt="" class="action-icon" src="../../../../assets/images/report-50.png"
+                            style="width:24px; height: 24px;" />&nbsp;&nbsp;</span>
+                    <span class="menu-lable" translate>menuReports</span>
+                </mat-panel-title>
+                <!-- <mat-panel-description class="expandable-item-description" translate>menuThreatActivityReports
+                    </mat-panel-description> -->
+            </div>
+        </mat-expansion-panel-header>
+        <!-- <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLink]="['/admin/reports/reportdashboard']" *ngIf="checkAcccessLevel('reportdashboard')">
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title sub-menu-lable" translate>menuReportDashboard</span>
+        </a>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLink]="['/admin/reports/throughput']" *ngIf="checkAcccessLevel('throughput')">
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title sub-menu-lable" translate>menuThroughput</span>
+        </a>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLink]="['/admin/reports/threatactivityreport']" *ngIf="checkAcccessLevel('threatactivityreport')">
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title sub-menu-lable" translate>menuThreatActivity</span>
+        </a>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLink]="['/admin/reports/datewise']" *ngIf="checkAcccessLevel('datewise')">
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title sub-menu-lable" translate>menuThreatReport</span>
+        </a> -->
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLink]="['/admin/reports/personscannedreportgraph']"
+            *ngIf="checkAcccessLevel('personscannedreportgraph')">
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title sub-menu-lable">Dashboard</span>
+        </a>
+        <!-- <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLink]="['/admin/reports/Personspecificthreatreport']"
+            *ngIf="checkAcccessLevel('Personspecificthreatreport')">
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title sub-menu-lable">Total Persons Scanned</span>
+        </a> -->
+        <!-- <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLink]="['/admin/reports/personscanneddetails']" *ngIf="checkAcccessLevel('personscanneddetails')">
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title sub-menu-lable">Person Scanned Details Report</span>
+        </a> -->
+        <!-- <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLink]="['/admin/reports/scancount']" *ngIf="checkAcccessLevel('scancount')">
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title sub-menu-lable">Scan Count</span>
+        </a> -->
+        <!-- <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLink]="['/admin/reports/scancountdetailsreport']"
+            *ngIf="checkAcccessLevel('scancountdetailsreport')">
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title sub-menu-lable">Scan Count Details</span>
+        </a> -->
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLink]="['/admin/reports/alarminformationreport']"
+            *ngIf="checkAcccessLevel('alarminformationreport')">
+            <span class="icon-abbr">MO</span>
+            <!-- <span class="menu-item-title sub-menu-lable">Alarm Information</span> -->
+            <span class="menu-item-title sub-menu-lable">Scan Count Details</span>
+        </a>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLink]="['/admin/reports/devicedetailsreport']" *ngIf="checkAcccessLevel('devicedetailsreport')">
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title sub-menu-lable" translate>deviceinfosideMenu</span>
+        </a>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLink]="['/admin/reports/operatorInforeport']" *ngIf="checkAcccessLevel('operatorInforeport')">
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title sub-menu-lable" translate>Operator Information</span>
+        </a>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLink]="['/admin/reports/operatoractionreport']" *ngIf="checkAcccessLevel('operatoractionreport')">
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title sub-menu-lable">Operator Action</span>
+        </a>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLink]="['/admin/reports/screenermessage']" *ngIf="checkAcccessLevel('screenermessage')">
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title sub-menu-lable">Screener Message</span>
+        </a>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLink]="['/admin/reports/analyticdatareport']"
+            *ngIf="checkAcccessLevel('analyticdatareport' )&& betaTestMode">
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title sub-menu-lable" translate>menuAnalyticReport</span>
+        </a>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLink]="['/admin/reports/betatestmodereport']"
+            *ngIf="checkAcccessLevel('betatestmodereport') && betaTestMode">
+            <span class="icon-abbr">MO</span>
+            <span class="menu-item-title sub-menu-lable" translate>menuBetaTestModeReport</span>
+        </a>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel class="expandable-menu-item" #utilsExpandableSection="routerLinkActive" [expanded]="false"
+        [routerLinkActive]="['active']" *ngIf="checkAcccessLevel('venuesetup')">
+        <mat-expansion-panel-header>
+            <div class="item-header-content">
+                <mat-panel-title class="expandable-item-title">
+                    <span><img alt="" class="action-icon" src="../../../../assets/images/venusetup.png"
+                            style="width:36px; height: 36px; margin-left:-8px;" />&nbsp;&nbsp;</span>
+                    <span class="menu-lable" translate style="margin-top: 5px;margin-left: -5px;">menuVenueSetup</span>
+                </mat-panel-title>
+                <!-- <mat-panel-description class="expandable-item-description" translate>menuVenueSetup
+                    </mat-panel-description> -->
+            </div>
+        </mat-expansion-panel-header>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{exact: false}" [routerLink]="['/admin/venuesetup']"
+            *ngIf="checkAcccessLevel('venuesetup')">
+            <span class="menu-item-title sub-menu-lable" translate>menuVenueSetup</span>
+        </a>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{exact: false}" [routerLink]="['/admin/hexwavetogate']"
+            *ngIf="checkAcccessLevel('hexwavetogate')">
+            <span class="menu-item-title sub-menu-lable" translate>menuGateManagement</span>
+        </a>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{exact: false}" [routerLink]="['/admin/tablettohexwave']"
+            *ngIf="checkAcccessLevel('tablettohexwave')">
+            <span class="menu-item-title sub-menu-lable" translate>menuLaneManagement</span>
+        </a>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{exact: false}" [routerLink]="['/admin/devicemanagement']"
+            *ngIf="checkAcccessLevel('devicemanagement')">
+            <span class="menu-item-title sub-menu-lable" translate>menuDeviceManagement</span>
+        </a>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{exact: false}" [routerLink]="['/admin/tablet']"
+            *ngIf="checkAcccessLevel('tablet')">
+            <span class="menu-item-title sub-menu-lable" translate>menuTabletManagement</span>
+        </a>
+        <!-- <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{exact: false}" [routerLink]="['/admin/location']"
+            *ngIf="checkAcccessLevel('location')">
+            <span class="menu-item-title sub-menu-lable">Location Management</span>
+        </a>
+        <a class="expandable-sub-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{exact: false}" [routerLink]="['/admin/customer']"
+            *ngIf="checkAcccessLevel('customer')">
+            <span class="menu-item-title sub-menu-lable">Customer Management</span>
+        </a> -->
+    </mat-expansion-panel>
+
+    <a class="simple-menu-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+        [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/admin/diagnostics']"
+        *ngIf="checkAcccessLevel('diagnostics')">
+        <span><img alt="" class="action-icon" src="../../../../assets/images/diagnostics.png"
+                style="width:28px; height: 28px;" />&nbsp;&nbsp;</span>
+        <span class="menu-item-title menu-lable" translate>menuDiagnostics</span>
+    </a>
+
+    <a class="simple-menu-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+        [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/admin/statemonitoring']"
+        *ngIf="checkAcccessLevel('statemonitoring')">
+        <span><img alt="" class="action-icon" src="../../../../assets/images/StateMonitor.png"
+                style="width:24px; height: 24px;" />&nbsp;&nbsp;</span>
+        <span class="menu-item-title menu-lable">Application State Monitor</span>
+    </a>
+    <a class="simple-menu-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+        [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/admin/settings']"
+        *ngIf="checkAcccessLevel('settings')">
+        <span><i class="fa fa-user fa-2x " aria-hidden="true"></i>
+            <span style="margin-left: -4px;"><b><i class="fa fa-cogs" aria-hidden="true"></i></b></span>&nbsp;</span>
+        <span class="menu-item-title menu-lable" translate>menuUserSettings</span>
+    </a>
+    <a class="simple-menu-item" (click)="toggleSideMenu()" [routerLinkActive]="['active']"
+        [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/admin/systeminformation']"
+        *ngIf="checkAcccessLevel('systeminformation')">
+        <span><i class="fa fa-info-circle" aria-hidden="true" style="font-size: 2em;"></i>&nbsp;&nbsp;</span>
+        <span class="menu-item-title menu-lable">Software Information</span>
+    </a>
+
+</app-condense>

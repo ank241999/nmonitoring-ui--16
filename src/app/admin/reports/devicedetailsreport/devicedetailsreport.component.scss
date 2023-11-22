@@ -1,0 +1,71 @@
+@import "../../../styles/_variables";
+@import "../../../styles/_tables";
+@import "../../../styles/_nouislider-override";
+
+
+#smart-tables {
+  .card {
+    .innercard-wrapper {
+      .title {
+        .main-title {
+          font-family: Arial;
+          font-size: 36px;
+          font-weight: bold;
+        }
+      }
+
+
+    }
+  }
+}
+
+body {
+  background: #EBEBEB !important;
+  margin: 0px;
+  padding: 0px;
+  font-size: 14px;
+  color: #143245;
+}
+
+::ng-deep {
+  .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
+    border: 1px solid #E4E4E4;
+    height: 38px;
+  }
+
+  .mdc-text-field--filled {
+    --mdc-filled-text-field-active-indicator-height: 0px !important;
+    --mdc-filled-text-field-container-shape: 0px !important;
+  }
+
+  .mat-mdc-icon-button {
+    --mdc-icon-button-state-layer-size: 38px !important;
+    padding: 0px !important;
+  }
+
+  .mat-datepicker-content .mat-calendar {
+    background-color: white;
+  }
+
+  .mat-calendar-body-cell-content {
+    border-color: white !important;
+  }
+
+  .mat-calendar-body-selected {
+    background-color: #9c27b0 !important;
+    color: white !important;
+  }
+
+  .mdc-text-field {
+    padding: 0px 0px !important;
+  }
+
+  .mat-mdc-form-field .mdc-line-ripple {
+    display: none !important;
+  }
+
+}
+
+.mdc-text-field__input {
+  padding: 8px;
+}

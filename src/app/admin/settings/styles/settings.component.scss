@@ -1,0 +1,251 @@
+@import '../../../styles/_variables.scss';
+@import '../../../styles/_mixins.scss';
+
+.file-upload {
+  display: inline-block;
+  position: relative;
+}
+
+.file-upload input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-upload label {
+  display: block;
+  padding: 2px 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+}
+
+.file-upload label i {
+  margin-right: 10px;
+}
+
+.file-upload label:hover {
+  background-color: #f0f0f0;
+}
+
+
+.inputWrapper {
+  .card {
+    .title {
+      .main-title {
+        font-family: Arial;
+        font-size: 36px;
+        font-weight: bold;
+      }
+    }
+
+    .form-horizontal {
+      .form-group {
+        // .form-label{
+
+        // }
+        // .hidden-label{
+
+        // }
+        mat-accordion {
+          mat-expansion-panel {
+            // mat-expansion-panel-header{
+
+            // }
+            // .user-setting-text{
+
+            // }
+            ul {
+              list-style-type: none;
+              margin: 0;
+              padding: 0;
+              width: 100%;
+
+              li {
+                a {
+                  border-bottom: 1px solid #5d5656;
+                  color: $libertyBlue;
+                  display: block;
+                  padding: 20px 16px;
+                  text-decoration: none;
+                }
+
+                a:hover,
+                a:focus {
+                  background: $white;
+                  color: $libertyBlue;
+                  text-decoration: none;
+                }
+
+                .next {
+                  position: relative !important;
+
+                  .color-dv {
+                    border-radius: 30px;
+                    cursor: pointer;
+                    margin: 0px auto;
+                    width: 20px;
+                  }
+
+                  .color-popup-dv {
+                    display: none;
+                    opacity: 1;
+                    padding: 24px 42px 15px 12px;
+                    position: absolute;
+                    right: 0;
+                    top: 0px;
+
+                    .color-outer-dv {
+                      border: 1.5px solid #000000 !important;
+                      border-radius: 30px !important;
+                      float: right;
+                      height: 28px !important;
+                      margin-left: 5px !important;
+                      margin-right: 5px !important;
+                      margin-top: -7px;
+                      padding: 2px;
+                      width: 28px !important;
+
+                      .color-dv-popup {
+                        border-radius: 30px;
+                        cursor: pointer;
+                        height: 16px;
+                        margin: 2px auto;
+                        width: 16px;
+                      }
+                    }
+                  }
+                }
+              }
+
+              li:last-child a {
+                border-bottom: 0px none;
+                color: $libertyBlue;
+                display: block;
+                padding: 20px 16px;
+                text-decoration: none;
+
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.mat-slide-toggle-ripple {
+  height: 0px !important;
+  width: 0px !important;
+}
+
+div.mat-mdc-select-panel {
+  background-color: white !important;
+  position: absolute !important;
+  margin-left: -12px !important;
+  max-height: 256px !important;
+  border-radius: 5px !important;
+  padding: 0px 0 !important;
+}
+
+.mat-mdc-option {
+  color: #9b9b9b !important;
+
+  .mat-pseudo-checkbox {
+    display: none;
+  }
+}
+
+.cdk-overlay-pane .mat-mdc-option:hover:not(.mat-mdc-option-disabled),
+.cdk-overlay-pane .mat-mdc-option:focus:not(.mat-mdc-option-disabled) {
+  &:hover {
+    background-color: $libertyBlue !important;
+    color: #fff !important;
+    transition: background-color 0.3s ease;
+  }
+}
+
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled):not(.mat-mdc-option-multiple) {
+  background-color: rgba(0, 0, 0, 0.12) !important;
+}
+
+.mat-slide-toggle-label-on {
+  display: none !important;
+}
+
+.mat-slide-toggle-label-off {
+  display: none !important;
+}
+
+.mdc-switch:enabled .mdc-switch__track::before {
+  background: $libertyBlue !important;
+}
+
+.mdc-switch:enabled .mdc-switch__track::after {
+  background: green !important;
+}
+
+.mdc-switch {
+  width: 80px !important;
+
+  .mdc-switch__handle {
+    background-color: white;
+    width: 25px !important;
+    height: 25px !important;
+    border-radius: 50% !important;
+  }
+
+  .mdc-switch__track {
+    height: 28px !important;
+    border-radius: 120px !important;
+  }
+
+  .mdc-switch--selected .mdc-switch__icon {
+    height: 25px !important;
+    width: 25px !important;
+  }
+}
+
+.mdc-switch.mdc-switch--selected:enabled .mdc-switch__icon {
+  fill: none !important;
+}
+
+.mdc-switch.mdc-switch--unselected:enabled .mdc-switch__icon {
+  fill: none !important;
+}
+
+.mdc-switch--selected .mdc-switch__handle-track {
+  transform: translate3d(54px, 0, 0) !important;
+}
+
+.mdc-switch__handle-track {
+  transform: translate3d(1px, 0, 0) !important;
+}
+
+
+// iPhone X in landscape
+@media only screen and (min-device-width : 375px) and (max-device-width : 812px) and (-webkit-device-pixel-ratio : 3)and (orientation : landscape) {}
+
+// iPhone X in portrait
+@media only screen and (min-device-width : 375px) and (max-device-width : 812px) and (-webkit-device-pixel-ratio : 3) and (orientation : portrait) {}
+
+// iPad in landscape
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {}
+
+// iPad in portrait
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {}
+
+@media screen and (width: 1600px),
+screen and (height: 900px) {}
+
+@media screen and (width: 1366px),
+screen and (height: 768px) {}

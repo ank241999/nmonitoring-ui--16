@@ -1,0 +1,40 @@
+<div class="alert-modal">
+    <div>
+        <h4 class="alert-modal-title">Shutdown Confirmation
+            <img alt="" src="../../../assets/images/closescreen_icon.jpg" (click)="onScreenClose()"
+                style="cursor: pointer;border: solid 0px;height: 20px; width: 20px;margin-right:10px; float: right;" />
+        </h4>
+    </div>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-1">&nbsp;</div>
+            <div class="col-xs-10">
+                <div>
+                    <span class="form-label form-label-big col-sm-12"
+                        style="margin-block: 25px;font-size: 16px;font-weight: bold;">
+                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        Do you want to Shutdown ?
+                    </span>
+                </div>
+            </div>
+            <div class="col-xs-1">&nbsp;</div>
+        </div>
+        <div class="row alert-modal-buttons">
+            <div class="col-xs-3"></div>
+            <div class="col-xs-3">
+                <button class="btn alert-modal-button" (click)="onScreenClose()">
+                    <span><i class="fa fa-times" aria-hidden="true" style="font-size:20px;"></i>
+                    </span>
+                    <p class="mt-2 text_t"> No</p>
+                </button>
+            </div>
+            <div class="col-xs-3">
+                <button class="btn alert-modal-button">
+                    <span><i class="fa fa-thumbs-up" aria-hidden="true" style="font-size:20px;"></i></span>
+                    <p class="mt-2 text_t">Yes</p>
+                </button>
+            </div>
+            <div class="col-xs-3"></div>
+        </div>
+    </div>
+</div>

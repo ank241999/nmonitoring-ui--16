@@ -1,0 +1,652 @@
+<div class="inputWrapper statemonitor">
+    <div id="smart-tables">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="card">
+                    <div class="row mb-15" style="margin-left: -45px; margin-right: -45px; min-height: 37px;">
+                        <div class="col-xs-2 text-left">&nbsp;
+                            <!-- <img alt="" src="../../../assets/images/backscreen_icon.jpg" (click)="onScreenBack()"
+                                style="cursor: pointer;" /> -->
+                        </div>
+                        <div class="col-xs-9 text-right">
+                        </div>
+                        <div class="col-xs-1 text-right">
+                            <img alt="" src="../../../assets/images/closescreen_icon.jpg" style="cursor: pointer;"
+                                (click)="onScreenClose()" />
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-1 link_back">&nbsp;</div>
+                            <div class="col-xs-10">&nbsp;</div>
+                            <div class="col-xs-1" style="text-align: right;">&nbsp;</div>
+                        </div>
+                        <div class="innercard-wrapper" style="margin: 5px;">
+                            <header class="row title  pd-left-75">
+                                <div class="col-xs-12">
+                                    <h2 class="main-title">Application State Monitor</h2>
+                                    <!-- <span class="close">&times;</span> -->
+                                </div>
+                            </header>
+                            <div class="container-fluid" style="background: rgba(52, 95, 144, 0.07);">
+                                <div class="row">
+                                    <select (change)="onDeviceChange($event.target.value);viewMode ='left';"
+                                        style="margin-top: 8px; margin-left: 12px; float: left; height: 33px; border-radius: 35px; border: none;">
+                                        <option value="">Connected Devices</option>
+                                        <option *ngFor="let device of devicesInSameLane" [value]="device.laneId">
+                                            {{device.deviceNames}}
+                                        </option>
+                                    </select>
+
+                                    <ul class="tab-slider--tabs" style="margin-top: 8px; margin-left: 12px;">
+                                        <li class="tab-slider--trigger" [class.active]="viewMode == 'left'" rel="left"
+                                            (click)="viewMode ='left';serviceStatus(leftDevice.ipAddress);">
+                                            {{leftdeviceName}}
+                                        </li>
+                                        <li class="tab-slider--trigger" [class.active]="viewMode == 'right'" rel="right"
+                                            (click)="viewMode ='right';serviceStatus(rightDevice.ipAddress);">
+                                            {{rightdeviceName}}
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class=" row tab-slider--container"
+                                    *ngIf="leftdeviceName!='No Device' && rightdeviceName!='No Device'"
+                                    style="    margin: 0px;">
+                                    <div id="left" class="tab-slider--body">
+                                        <!-- Buttons row Start -->
+                                        <div class="container-fluid" style="margin-top: 10px;">
+                                            <div class="row">
+                                                <fieldset
+                                                    style="border-bottom: none; border-left: none; border-right: none;">
+                                                    <legend style="width: 12%;">
+                                                        <span
+                                                            style=" margin-left: 4px; font-weight: 800;">{{ipDeviceShown}}</span>
+                                                    </legend>
+                                                </fieldset>
+
+
+                                                <fieldset>
+                                                    <legend style="width: 12%;">
+                                                        <span style=" margin-left: 4px; font-weight: 800;">Core
+                                                            Services</span>
+                                                    </legend>
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.Camera.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.Camera.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span style=" font-size: 16px;">camera</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="allprocessrearrangedata.FPGAInterface == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="allprocessrearrangedata.FPGAInterface == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span style=" font-size: 16px;">FPGA
+                                                                            Interface</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="allprocessrearrangedata.DataReduction == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="allprocessrearrangedata.DataReduction == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span style=" font-size: 16px;">Data
+                                                                            Reduction</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="allprocessrearrangedata.ImageReconstruction == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="allprocessrearrangedata.ImageReconstruction == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span style=" font-size: 16px;">Image
+                                                                            Recon</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <!-- <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                style="margin-top: 20px;"
+                                                                [ngStyle]="deviceStatus.Aggregate.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.Aggregate.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span style=" font-size: 16px;">aggregate</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div> -->
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                style="margin-top: 20px;"
+                                                                [ngStyle]="deviceStatus.Recorder.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.Recorder.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span style=" font-size: 16px;">recorder</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                style="margin-top: 20px;"
+                                                                [ngStyle]="deviceStatus.core.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.core.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span style=" font-size: 16px;">core</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                style="margin-top: 20px;"
+                                                                [ngStyle]="deviceStatus.Capture.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.Capture.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span style=" font-size: 16px;">capture</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <!--Core Service end-->
+
+                                                <!--Loggin code start-->
+                                                <fieldset style="margin-top: 10px;">
+                                                    <legend style="width: 14%;">
+                                                        <span style=" margin-left: 4px; font-weight: 800;">Logging
+                                                            Services</span>
+                                                    </legend>
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.loki.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.loki.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span style=" font-size: 16px;">loki</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.Grafana.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.Grafana.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span style=" font-size: 16px;">grafana</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.Prometheus.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.Prometheus.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span
+                                                                            style=" font-size: 16px;">prometheus</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.Collector.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.Collector.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span style=" font-size: 16px;">collector</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-top: 20px;">
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.Tempo.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.Tempo.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span style=" font-size: 16px;">tempo</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.DcgmExporter.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.DcgmExporter.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span
+                                                                            style=" font-size: 16px;">dcgm-exporter</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.ProcessExporter.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.ProcessExporter.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span
+                                                                            style=" font-size: 16px;">process-exporter</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.NodeExporter.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.NodeExporter.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span
+                                                                            style=" font-size: 16px;">node-exporter</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <!--Loggin code end-->
+
+                                                <!--Backend Service code start-->
+                                                <fieldset style="margin-top: 10px;">
+                                                    <legend style="width: 14%;">
+                                                        <span style=" margin-left: 4px; font-weight: 800;">Backend
+                                                            Services</span>
+                                                    </legend>
+                                                    <div class="row">
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.ActiveMonitorFrontend.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.ActiveMonitorFrontend.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span
+                                                                            style=" font-size: 16px;">threat-monitor-frontend</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.ActiveMonitorBackend.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.ActiveMonitorBackend.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span
+                                                                            style=" font-size: 16px;">threat-monitor-backend</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.AISimulatorBackend.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.AISimulatorBackend.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span
+                                                                            style=" font-size: 16px;">threat-monitor-process-api</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.db.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.db.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span style=" font-size: 16px;">db</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-top: 20px;">
+                                                        <!-- <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.DeviceDetect.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.DeviceDetect.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span
+                                                                            style=" font-size: 16px;">device-detect-service</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div> -->
+                                                        <div class="col-md-3">
+                                                          <div class="status-btn container-fluid"
+                                                              [ngStyle]="deviceStatus.Kong.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                              <div class="row">
+                                                                  <div class="col-md-2">
+                                                                      <i [ngClass]="deviceStatus.Kong.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                          aria-hidden="true"></i>
+                                                                  </div>
+                                                                  <div class="col-md-9 text-center ">
+                                                                      <span style=" font-size: 16px;">kong</span>
+                                                                  </div>
+                                                                  <div class="col-md-1"></div>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.DeviceSetting.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.DeviceSetting.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span
+                                                                            style=" font-size: 16px;">device-setting-service</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.UserRoleAuth.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.UserRoleAuth.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span
+                                                                            style=" font-size: 16px;">user-role-auth</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.Peripheral.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.Peripheral.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span
+                                                                            style=" font-size: 16px;">peripheral-service</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-top: 20px;">
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.Report.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.Report.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span
+                                                                            style=" font-size: 16px;">report-service</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.UserSetting.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.UserSetting.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span
+                                                                            style=" font-size: 16px;">user-setting-service</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.Adminer.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.Adminer.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span style=" font-size: 16px;">adminer</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.Auth.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.Auth.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span
+                                                                            style=" font-size: 16px;">auth-service</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row" style="margin-top: 20px;">
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.Keycloak.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-2">
+                                                                        <i [ngClass]="deviceStatus.Keycloak.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-9 text-center ">
+                                                                        <span style=" font-size: 16px;">keycloak</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                                <!--Backend Service code end-->
+
+
+                                                <!--Backend Service code start-->
+                                                <fieldset style="margin-top: 10px;">
+                                                    <legend style="width: 9%;">
+                                                        <span style=" margin-left: 5px; font-weight: 800;">AI
+                                                            Services</span>
+                                                    </legend>
+                                                    <div class="row p-2">
+                                                        <!-- <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus.Retinanet.status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-3">
+                                                                        <i [ngClass]="deviceStatus.Retinanet.status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-7">
+                                                                        <span style=" font-size: 16px;">retinanet</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div> -->
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus['Aggregate-algo'].status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-3">
+                                                                        <i [ngClass]="deviceStatus['Aggregate-algo'].status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-7">
+                                                                        <span style=" font-size: 16px;">aggregate-algo</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-3">
+                                                            <div class="status-btn container-fluid"
+                                                                [ngStyle]="deviceStatus['Detect-algo'].status == 'UP'?{'background-color': '#339900'} : {'background-color': '#CC0033'}">
+                                                                <div class="row">
+                                                                    <div class="col-md-3">
+                                                                        <i [ngClass]="deviceStatus['Detect-algo'].status == 'UP'?'fa fa-check me-5' : 'fa fa-times me-5'"
+                                                                            aria-hidden="true"></i>
+                                                                    </div>
+                                                                    <div class="col-md-7">
+                                                                        <span style=" font-size: 16px;">detector-algo</span>
+                                                                    </div>
+                                                                    <div class="col-md-1"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-slider--container"
+                                    *ngIf="leftdeviceName=='No Device' && rightdeviceName=='No Device'"
+                                    [ngSwitch]="viewMode">
+                                    <span>No device is connected with this tablet.</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

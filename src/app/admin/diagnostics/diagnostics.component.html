@@ -1,0 +1,75 @@
+<!-- <p>diagnostics works!</p> -->
+<div class="inputWrapper diagnostics">
+    <div class="card">
+        <div class="row mb-15" style="margin-left: -45px; margin-right: -45px; min-height: 37px;">
+            <div class="col-xs-2 text-left">&nbsp;
+                <!-- <img alt="" src="../../../assets/images/backscreen_icon.jpg" (click)="onScreenBack()" style="cursor: pointer;" /> -->
+            </div>
+            <div class="col-xs-8">&nbsp;</div>
+            <div class="col-xs-2 text-right">&nbsp;
+                <img alt="" src="../../../assets/images/closescreen_icon.jpg" (click)="onClose()" style="cursor: pointer;" />
+            </div>
+        </div>
+        <header class="row title">
+            <div class="col-xs-12">
+                <div class="col-lg-5 col-xs-12">
+                    <h2 class="main-title" translate>diagodiagnostics</h2>
+                </div>
+                <div class="col-lg-7 col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12 col-lg-2 col-md-2 col-sm-12">
+                        </div>
+                        <div class="col-xs-12 col-lg-2 col-md-2 col-sm-12">
+                            <button class="globalButton" (click)="startcapture()">
+                                <span>
+                                    <i class="fa fa-camera fa-2x btnIcon" aria-hidden="true"></i>
+                                </span>
+                                <p class="buttonName">Start Capture</p>
+                            </button>
+                        </div>
+                        <div class="col-xs-12 col-lg-2 col-md-2 col-sm-12">
+                            <button class="globalButton" type="button" (click)="stopcapture()">
+                                <span>
+                                    <i class="fa fa-camera-retro fa-2x btnIcon" aria-hidden="true"></i>
+                                </span>
+                                <p class="buttonName">Stop Capture</p>
+                            </button>
+                        </div>
+                        <div class="col-xs-12 col-lg-2 col-md-2 col-sm-12">
+                            <button class="globalButton" type="button" [routerLink]="['/admin/statemonitoring']">
+                                <span>
+                                    <i class="fa fa-desktop fa-2x btnIcon" aria-hidden="true"></i>
+                                </span>
+                                <p class="buttonName">State Monitor</p>
+                            </button>
+                        </div>
+                        <div class="col-xs-12 col-lg-2 col-md-2 col-sm-12">
+                            <button class="globalButton" type="button" (click)="rebootDevice()">
+                                <span>
+                                    <i class="fa fa-undo fa-2x btnIcon" aria-hidden="true"></i>
+                                </span>
+                                <p class="buttonName">Reboot Device</p>
+                            </button>
+                        </div>
+                        <div class="col-xs-12 col-lg-2 col-md-2 col-sm-12">
+                            <button class="globalButton" type="button" (click)="shutdownDevice()">
+                                <span>
+                                    <i class="fa fa-power-off fa-2x btnIcon" aria-hidden="true"></i>
+                                </span>
+                                <p class="buttonName" style="margin: 0px -5px 25px;">Shutdown</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="min-height: 100px;"></div>
+        </header>
+        <div class="row" *ngIf="showcapture">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-11 col-xs-12">
+                <iframe title="" [src]="urlMap" width="100%" height="400" frameborder="0" style="border:0"
+                    allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+</div>

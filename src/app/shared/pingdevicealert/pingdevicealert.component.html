@@ -1,0 +1,71 @@
+<div class="alert-modal" style="padding: 0px !important; height: 188px !important;">
+    <div>
+        <h4 class="alert-modal-title">Device Status
+            <!--{{title}}-->
+            <img alt="" src="../../../assets/images/closescreen_icon.jpg" (click)="onScreenClose()"
+                style="cursor: pointer;border: solid 0px;height: 20px; width: 20px;margin-right:10px; float: right;" />
+        </h4>
+    </div>
+    <div class="row" style="text-align: center;">
+        <!-- <div class="col-xs-1">&nbsp;</div> -->
+        <div class="col-xs-12 tablet" style="padding-left: 20px; padding-right: 20px; padding-top: 0px;" >
+            <div>
+                <table class="table table-stripes" mat-table>
+                    <caption></caption>
+                    <tr >
+                        <th class="ping-th" style="text-align: left;">DEVICE
+                            NAME</th>
+                        <th class="ping-th">
+                            IP ADDRESS</th>
+                        <th class="ping-th" style="text-align: left; padding-left: 8px;">
+                            SIDE</th>
+                        <th class="ping-th" style="text-align: left; padding-left: 8px;">STATUS</th>
+                    </tr>
+                    <tr class="ping-tr" *ngIf="device1Name !== ''" >
+                        <td class="ping-td" style="text-align: left;">{{
+                            device1Name }}</td>
+                        <td class="ping-td">
+                            {{ device1Address }}</td>
+                        <td class="ping-td" style="text-align: left;">
+                            LEFT</td>
+                        <td class="ping-td" style="text-align: left; padding-left: 8px;">
+                            {{ device1Status }}</td>
+                    </tr>
+                    <tr class="ping-tr" *ngIf="device2Name !== ''" >
+                        <td class="ping-td" style="text-align: left;">
+                            {{ device2Name }}</td>
+                        <td class="ping-td">
+                            {{ device2Address }}</td>
+                        <td class="ping-td" style="text-align: left;">
+                            RIGHT</td>
+                        <td class="ping-td" style="text-align: left; padding-left: 8px;">
+                            {{ device2Status }}</td>
+                    </tr>
+                </table>
+                <!-- <span class="form-label form-label-big col-sm-12"
+                    style="font-size: 16px;font-weight: bold;margin-top: 20px; text-align: left;"
+                    *ngIf="device1Name !== ''">
+                    Left Device Name: {{ device1Name }} <br />
+                    Left Device Address: {{ device1Address }} <br />
+                    Left Device Blinked: {{ device1Status }} <br />
+                </span><br />
+                <span class="form-label form-label-big col-sm-12"
+                    style="font-size: 16px;font-weight: bold;margin-top: 20px; text-align: left"
+                    *ngIf="device2Name !== ''">
+                    Right Device Name: {{ device2Name }} <br />
+                    Right Device Address: {{ device2Address }} <br />
+                    Right Device Blinked: {{ device2Status }} <br />
+                </span> -->
+            </div>
+        </div>
+        <div class="col-xs-1">&nbsp;</div>
+    </div>
+
+    <div>
+        <div class="alert-modal-buttons" style="margin-top: 30px !important;">
+            <button type="button" class="btn alert-modal-button alert-modal-button-success"
+                [mat-dialog-close]="inputData"
+                style="margin-top: 0px !important; height: 40px !important; width: 40px !important;">OK</button>
+        </div>
+    </div>
+</div>

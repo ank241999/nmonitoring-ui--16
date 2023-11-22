@@ -1,0 +1,471 @@
+<div style="padding: 16px 0px 0px 0px;background-color:#EBEBEB">
+  <div class="container-fluid" *ngIf="filtersVisible">
+    <div *ngIf="viewMode === 'Tab1'">
+      <form [formGroup]="filtersForm">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card" style="padding-top: 0px;margin-bottom: 2px!important;">
+              <div class="row" style="margin-bottom: 10px;">
+                <div class="col-md-6">
+                  <h3 style="font-weight: bold;">Total Persons Scanned Report</h3>
+                </div>
+                <div class="col-md-5 mt-15 ml-30">
+                  <ul class="tab-slider--tabs tab-slide">
+                    <li class="tab-slider--trigger" [class.active]="viewMode == 'Tab1'" rel="Tab1"
+                      (click)="onTab1Click(); viewMode ='Tab1'">
+                      Total Persons Scanned</li>
+                    <li class="tab-slider--trigger" [class.active]="viewMode == 'Tab2'" rel="Tab2"
+                      (click)="onTab2Click(); viewMode ='Tab2'">
+                      Region Wise Alarms</li>
+                  </ul>
+                </div>
+                <div class="col-md-1"></div>
+              </div>
+              <div class="row">
+                <div class="col-md-9">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-3" style="font-size: 16px;margin-top: 8px;">
+                          Start Date
+                        </div>
+                        <div class="col-md-5" style="margin-left: -30px">
+                          <mat-form-field class="no-line ">
+                            <input type="text" matInput [matDatepicker]="picker" [min]="minFromDate" [max]="maxFromDate"
+                              [formControl]="filtersForm.controls.subscribed" />
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker> </mat-datepicker>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-2" style="margin-top: 5px;">
+                          <input type="time" class="time" [formControl]="filtersForm.controls.subscribedTime">
+                        </div>
+                        <div class="col-md-2"></div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="row">
+                        <div class="col-md-3 text-right" style="font-size: 16px;margin-top: 8px;">
+                          End Date
+                        </div>
+                        <div class="col-md-5">
+                          <mat-form-field class="no-line">
+                            <input type="text" matInput [matDatepicker]="pickerTo" [min]="minFromDate"
+                              [max]="maxFromDate" [formControl]="filtersForm.controls.dateTo" />
+                            <mat-datepicker-toggle matSuffix [for]=" pickerTo"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerTo> </mat-datepicker>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-md-2" style="margin-top: 5px;">
+                          <input type="time" class="time" [formControl]="filtersForm.controls.dateToTime">
+                        </div>
+                        <div class="col-md-2"></div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <button class="Regionbtndone" (click)="onShowReport()">
+                        <span>
+                          <i aria-hidden="true" class="fa fa-file-text-o fa-2x" style="margin-top: 2px"></i>
+                        </span>
+                        <p>Show Report</p>
+                      </button>
+                    </div>
+                    <div class="col-md-4">
+                      <button (click)="onDone()" class="Regionbtndone">
+                        <span>
+                          <i class="fa fa fa-check fa-2x" aria-hidden="true" style="margin-top: 6px;">
+                          </i>
+                        </span>
+                        <p style="padding-top: 5px;">Done</p>
+                      </button>
+                    </div>
+                    <div class="col-md-4">
+                      <button class="Regionbtndone" (click)="totalPersonsScannedReportPDF()" [disabled]="!isEnabled">
+                        <span>
+                          <i class="fa fa-file-pdf-o fa-2x" aria-hidden="true" style="margin-top: 6px;"></i>
+                        </span>
+                        <p>Export to PDF</p>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12" style="font-size: 18px;font-weight: 700;">
+                  <i class="fa fa-users" aria-hidden="true" style="margin-top: 5px; font-size: 16px;">
+                  </i> &nbsp;
+                  <span>
+                    Total Persons Scanned since installation &nbsp;
+                    {{totalpersons}}
+                  </span>
+                </div>
+                <div class="col-md-4"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="totalPersonsScannedReport" class="row">
+          <div class="col-md-5" style="padding-right: 0px;">
+            <div class="card dash-alarmsdetails" style="margin-bottom: 2px !important;">
+              <div class="row" style="margin-bottom: 5px;">
+                <div class="col-md-1" style="font-weight:600;font-size: 16px;">
+                  <span class="fa-stack" style="background-color: black;height: 16px; width: 16px;">
+                    <i aria-hidden="true" class="fa fa-plus fa-stack"
+                      style="font-size: 12px; color: white;bottom: 10px;left: 3px;"></i>
+                    <i aria-hidden="true" class="fa fa-minus fa-stack"
+                      style="font-size: 12px; bottom:35px; left: 3px;color: white;"></i>
+                  </span>
+                </div>
+                <div class="col-md-7" style="font-weight:600;font-size: 16px;">
+                  <span style="font-size: 16px;">
+                    Total Persons Scanned during the time period
+                  </span>
+                </div>
+                <div class="col-md-2">
+                  <progress max="100"
+                    [value]="total_noobject+total_threat==0?0:(totalthreatofperiod/(total_noobject+total_threat)*100)"
+                    class="my-progress-bar">{{totalthreatofperiod}}</progress>
+
+                </div>
+                <div class="col-md-2" style="margin-left: -5px">
+                  {{totalthreatofperiod}}
+
+                </div>
+              </div>
+              <div class="row" style="color:#4E79A6; font-size: 16px;margin-bottom: 5px;">
+                <div class="col-md-1"><i class="fa fa-times" aria-hidden="true" style="font-size: 18px;"></i></div>
+                <div class="col-md-7">
+                  <span>
+                    Total Persons with no alarms
+                  </span>
+                </div>
+                <div class="col-md-2">
+                  <progress max="100"
+                    [value]="total_noobject+total_threat==0?0:(total_noobject/(total_noobject+total_threat)*100)"
+                    class="my-progress-bar-no-alarms">{{total_noobject}}
+                  </progress>
+                </div>
+                <div class="col-md-2" style="margin-left: -5px">
+                  {{total_noobject}}
+                </div>
+              </div>
+              <div class="row" style="color:#FE6265;font-size: 16px;">
+                <div class="col-md-1">
+                  <i class="fa fa-bug" aria-hidden="true" style="font-size: 18px;">
+                  </i>
+                </div>
+                <div class="col-md-7">
+                  <span style="font-size: 16px;">
+                    Total Persons with alarms
+                  </span>
+                </div>
+                <div class="col-md-2">
+                  <progress max="100"
+                    [value]="total_noobject+total_threat==0?0:(total_threat/(total_noobject+total_threat)*100)"
+                    class="my-progress-bar-alarms">{{total_noobject}}
+                  </progress>
+                </div>
+                <div class="col-md-2" style="margin-left: -5px">
+                  {{total_threat}}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card" style="margin-bottom:0px !important;">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="piechart">
+                        <canvas *ngIf="displayNumberGraph" baseChart [datasets]="pieChartData" [labels]="pieChartLabels"
+                          [type]="'pie'" [options]="pieChartOptionsNumber" [plugins]="pieChartPlugins"
+                          [legend]="pieChartLegend">
+                        </canvas>
+                        <canvas *ngIf="displayPercentageGraph" baseChart [datasets]="pieChartData"
+                          [labels]="pieChartLabels" [type]="'pie'" [options]="pieChartOptions"
+                          [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+                        </canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6" style="padding-left: 2px; padding-right: 0px;">
+            <div class="card" style="margin-bottom:0px !important;">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="bar-chart">
+                    <canvas *ngIf="displayNumberGraph" baseChart class="ng2-chart"
+                      [datasets]="reportpersonspecificthreat" [labels]="reportpersonspecificthreatLabels"
+                      [plugins]="ChartPlugins" [options]="reportpersonspecificthreatoptions"
+                      [legend]="PersonscannedbarChartLegend" [type]="'bar'" (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)">
+                    </canvas>
+                    <canvas *ngIf="displayPercentageGraph" baseChart class="ng2-chart"
+                      [datasets]="reportpersonspecificthreatPercentage" [labels]="reportpersonspecificthreatLabels"
+                      [plugins]="ChartPlugins" [options]="barChartOptionspercent" [legend]="PersonscannedbarChartLegend"
+                      [type]="'bar'" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                    </canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-1" style="padding-left: 0px;">
+            <div class="card person-dash-alarm" style="margin-bottom: 2px;padding-left: 0px;background-color: #ffff;">
+              <div class="row text-right mt-5">
+                <select (change)="dropdownGraph($event.target.value)">
+                  <option value="number" [selected]="tab1DisplayNumberGraph">Number</option>
+                  <option value="percentage" [selected]="tab1DisplayPercentageGraph">Percentage
+                  </option>
+                </select>
+              </div>
+              <div class="row text-right" style="margin-top: 110px;">
+                <p style="margin:1px;"><button class="btngrp" (click)="onFilter('YEAR',365*6);changeColor('year');"
+                    [ngClass]="{'active': isActiveButton('year')}"
+                    style="border-top-left-radius: 10px;border-top-right-radius: 10px;">Year</button>
+                </p>
+                <p style="margin:1px;"><button class="btngrp" [ngClass]="{'active': isActiveButton('month')}"
+                    (click)="onFilter('MONTH',183);changeColor('month');">Month</button>
+                </p>
+                <p style="margin:1px;"><button class="btngrp" [ngClass]="{'active': isActiveButton('week')}"
+                    (click)="onFilter('WEEK',42);changeColor('week');">Week</button>
+                </p>
+                <p style="margin:1px;"><button class="btngrp" [ngClass]="{'active': isActiveButton('day')}"
+                    (click)="onFilter('DAY',5);changeColor('day');">Day</button>
+                </p>
+                <p style="margin:1px;"><button class="btngrp" [ngClass]="{'active': isActiveButton('hour')}"
+                    (click)="onFilter('HOUR',360);changeColor('hour');">Hour</button>
+                </p>
+                <p style="margin:1px;"><button class="btngrp" [ngClass]="{'active': isActiveButton('minute')}"
+                    (click)="onFilter('MINUTE',6);changeColor('minute');"
+                    style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">Minute</button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="viewMode === 'Tab2'">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card" style="padding-top: 0px;padding-bottom: 10px;margin-bottom: 2px; ">
+            <div class="row" style="margin-bottom: 10px;">
+              <div class="col-md-6">
+                <h3 style="font-weight: bold;">Region Wise Alarms Report</h3>
+              </div>
+              <div class="col-md-5 mt-15 ml-30">
+                <ul class="tab-slider--tabs tab-slide">
+                  <li class="tab-slider--trigger" [class.active]="viewMode == 'Tab1'" rel="Tab1"
+                    (click)="onTab1Click(); viewMode ='Tab1'">
+                    Total Persons Scanned</li>
+                  <li class="tab-slider--trigger" [class.active]="viewMode == 'Tab2'" rel="Tab2"
+                    (click)="onTab2Click(); viewMode ='Tab2'">
+                    Region Wise Alarms</li>
+                </ul>
+              </div>
+              <div class="col-md-1"></div>
+            </div>
+            <div class="row">
+              <div class="col-md-9">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3" style="font-size: 16px;margin-top: 8px;">
+                        Start Date
+                      </div>
+                      <div class="col-md-5" style="margin-left: -30px">
+                        <mat-form-field class="no-line ">
+                          <input type="text" matInput [matDatepicker]="picker" [min]="minFromDate" [max]="maxFromDate"
+                            [formControl]="filtersForm.controls.subscribed" />
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker> </mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-2" style="margin-top: 5px;">
+                        <input type="time" class="time" [formControl]="filtersForm.controls.subscribedTime">
+                      </div>
+                      <div class="col-md-2"></div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="row">
+                      <div class="col-md-3 text-right" style="font-size: 16px;margin-top: 8px;">
+                        End Date
+                      </div>
+                      <div class="col-md-5">
+                        <mat-form-field class="no-line">
+                          <input type="text" matInput [matDatepicker]="pickerTo" [min]="minFromDate" [max]="maxFromDate"
+                            [formControl]="filtersForm.controls.dateTo" />
+                          <mat-datepicker-toggle matSuffix [for]=" pickerTo"></mat-datepicker-toggle>
+                          <mat-datepicker #pickerTo> </mat-datepicker>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-2" style="margin-top: 5px;">
+                        <input type="time" class="time" [formControl]="filtersForm.controls.dateToTime">
+                      </div>
+                      <div class="col-md-2"></div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="row">
+                  <div class="col-md-4">
+                    <button class="Regionbtndone" (click)="onShowReport()">
+                      <span>
+                        <i aria-hidden="true" class="fa fa-file-text-o fa-2x" style="margin-top: 2px"></i>
+                      </span>
+                      <p>Show Report</p>
+                    </button>
+                  </div>
+                  <div class="col-md-4">
+                    <button (click)="regionLocationsonDone()" class="Regionbtndone">
+                      <span>
+                        <i class="fa fa fa-check fa-2x" aria-hidden="true" style="margin-top: 6px;">
+                        </i>
+                      </span>
+                      <p style="padding-top: 5px;">Done</p>
+                    </button>
+                  </div>
+                  <div class="col-md-4">
+                    <button class="Regionbtndone" (click)="regionWiseAlarmsReportPDF()" [disabled]="!isEnabled">
+                      <span>
+                        <i class="fa fa-file-pdf-o fa-2x" aria-hidden="true" style="margin-top: 6px;"></i>
+                      </span>
+                      <p>Export to PDF</p>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="regionWiseAlarmsReport" class="row">
+        <div class="col-md-5" style="padding-right: 0px;">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card" style="margin-bottom: 2px;">
+                <div class="row">
+                  <div class="region-chart">
+                    <canvas *ngIf="displayNumberGraph" baseChart [datasets]="Front_pieChartData"
+                      [colors]="Front_region_pieChartColors" [type]="'pie'"
+                      [options]="Front_Region_pieChartOptionsnumber" [plugins]="front_region_pieChartPlugins"
+                      [legend]="RegionPieChartLegend" [labels]="Front_region_pieChartLabels">
+                    </canvas>
+                    <canvas *ngIf="displayPercentageGraph" baseChart [datasets]="Front_region_Percent_pieChartData"
+                      [colors]="Front_region_pieChartColors" [type]="'pie'"
+                      [options]="Front_Region_pieChartOptionsPercent" [plugins]="front_region_pieChartPlugins"
+                      [legend]="RegionPieChartLegend" [labels]="Front_region_pieChartLabels">
+                    </canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="card" style="margin-bottom: 2px;">
+                <div class="row">
+                  <div class="region-chart">
+                    <canvas *ngIf="displayNumberGraph" baseChart [datasets]="Back_region_pieChartData"
+                      [colors]="Back_region_pieChartColors" [type]="'pie'" [options]="Back_Region_pieChartOptionsnumber"
+                      [legend]="RegionPieChartLegend" [labels]="Back_region_pieChartLabels"
+                      [plugins]="Back_region_pieChartPlugins">
+                    </canvas>
+                    <canvas *ngIf="displayPercentageGraph" baseChart [datasets]="Back_region_Percent_pieChartData"
+                      [colors]="Back_region_pieChartColors" [type]="'pie'"
+                      [options]="Back_Region_pieChartOptionsPercent" [legend]="RegionPieChartLegend"
+                      [labels]="Back_region_pieChartLabels" [plugins]="Back_region_pieChartPlugins">
+                    </canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6" style="padding-left: 2px;padding-right: 0px;">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card" style="margin-bottom: 2px;">
+                <div class="row">
+                  <div class="region-chart">
+                    <canvas *ngIf="displayNumberGraph" baseChart class="ng2-chart" [chartType]="Front_Region_barChart"
+                      [datasets]="frontregionsBarchart" [colors]="FrontBarcolors" [labels]="['']"
+                      [options]="barChartOptionsFrontRegions" [legend]="barChartLegend" [plugins]="ChartPlugins"
+                      (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                    </canvas>
+                    <canvas *ngIf="displayPercentageGraph" baseChart class="ng2-chart"
+                      [chartType]="Front_Region_barChart" [datasets]="frontregionsBarchart_percent"
+                      [colors]="FrontBarcolors" [labels]="['']" [options]="barChartFrontRegionPercent"
+                      [legend]="barChartLegend" [plugins]="ChartPlugins" (chartHover)="chartHovered($event)"
+                      (chartClick)="chartClicked($event)">
+                    </canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="card" style="margin-bottom: 2px;">
+                <div class="row">
+                  <div class="region-chart">
+                    <canvas *ngIf="displayNumberGraph" baseChart class="ng2-chart" [chartType]="backRegionbarChartType"
+                      [datasets]="BackregionsBarchart" [colors]="BackBarcolors" [options]="barChartOptionsBackRegions"
+                      [legend]="BackRegionbarChartLegend" [labels]="['']" [plugins]="ChartPlugins"
+                      (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                    </canvas>
+                    <canvas *ngIf="displayPercentageGraph" baseChart class="ng2-chart"
+                      [chartType]="backRegionbarChartType" [datasets]="BackregionsBarchartPercentage"
+                      [colors]="BackBarcolors" [options]="barChartFrontRegionPercent"
+                      [legend]="BackRegionbarChartLegend" [labels]="['']" [plugins]="ChartPlugins"
+                      (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                    </canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-1" style="padding-left: 0px;">
+          <div class="card regionfillter" style="margin-bottom: 2px;padding-left: 0px;background-color: #ffff;">
+            <div class="row text-right">
+              <select (change)="dropdownGraph($event.target.value)">
+                <option value="number" [selected]="tab2DisplayNumberGraph">Number</option>
+                <option value="percentage" [selected]="tab2DisplayPercentageGraph">Percentage</option>
+              </select>
+            </div>
+            <div class="row text-right" style="margin-top: 120px;">
+              <p style="margin:1px;"><button class="btngrp"
+                  (click)="onregionFilter('YEAR',365*1);buttonfillter('YEAR');changeColor('year');"
+                  [ngClass]="{'active': isActiveButton('year')}"
+                  style="border-top-left-radius: 10px;border-top-right-radius: 10px;">Year</button>
+              </p>
+              <p style="margin:1px;"><button class="btngrp" [ngClass]="{'active': isActiveButton('month')}"
+                  (click)="onregionFilter('MONTH',31);changeColor('month');">Month</button>
+              </p>
+              <p style="margin:1px;"><button class="btngrp" [ngClass]="{'active': isActiveButton('week')}"
+                  (click)="onregionFilter('WEEK',7);changeColor('week');">Week</button>
+              </p>
+              <p style="margin:1px;"><button class="btngrp" [ngClass]="{'active': isActiveButton('day')}"
+                  (click)="onregionFilter('DAY',1);changeColor('day');">Day</button>
+              </p>
+              <p style="margin:1px;"><button class="btngrp" [ngClass]="{'active': isActiveButton('hour')}"
+                  (click)="onregionFilter('HOUR',1);changeColor('hour');">Hour</button>
+              </p>
+              <p style="margin:1px;"><button class="btngrp" [ngClass]="{'active': isActiveButton('minute')}"
+                  (click)="onregionFilter('MINUTE', 15);changeColor('minute');"
+                  style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;">15
+                  Minute</button>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

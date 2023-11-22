@@ -1,0 +1,289 @@
+progress {
+  border-radius: 7px;
+  width: 100%;
+  height: 15px;
+  // box-shadow: 1px 1px 4px rgba( 0, 0, 0, 0.2 );
+}
+
+progress::-webkit-progress-bar {
+  background-color: #ffffff;
+}
+
+progress::-webkit-progress-value {
+  background-color: #99bbf1;
+  border-radius: 7px;
+}
+
+.btngrp {
+  background-color: #143345;
+  color: white;
+  height: 42px;
+  width: 72px;
+  padding-top: 0px;
+
+}
+
+.btnthroughPut {
+  height: 75px;
+  width: 75px;
+  background-color: #143345;
+  color: #ffffff;
+  border-radius: 10px;
+  font-weight: bold;
+  margin: 15px 0px 15px 2px;
+}
+
+.btndone {
+  height: 75px;
+  width: 75px;
+  background-color: #143345;
+  color: #ffffff;
+  border-radius: 10px;
+  font-weight: bold;
+  margin: -17px 0px 15px 50px;
+}
+
+.Regionbtndone {
+  height: 75px;
+  width: 75px;
+  background-color: #143345;
+  color: #ffffff;
+  border-radius: 10px;
+  font-weight: bold;
+  margin-top: -12px;
+}
+
+
+.btngrp:focus {
+  background: #4E79A6;
+}
+
+.btngrp:hover {
+  background-color: #4E79A6
+}
+
+.active {
+  background-color: #4E79A6;
+}
+
+.progress-bar {
+  width: 200px;
+  height: 25px;
+  background-color: white;
+}
+
+.progress-bar-fill {
+  background-color: #143345;
+  height: 100%;
+  /* This is important */
+}
+
+mat-select {
+  font-family: arial !important;
+  font-size: 16px;
+}
+
+.mat-form-field-underline {
+  display: none;
+}
+
+
+.mat-form-field {
+  border: solid 1px #565555;
+  height: 38px;
+  padding-left: 5px;
+  padding-top: 4px;
+  //   line-height: 2.250;
+}
+
+.time {
+  border: 1px solid #565555;
+  height: 38px;
+  margin-top: -4px;
+}
+
+.my-progress-bar::-webkit-progress-value {
+  background-color: #000000
+}
+
+.my-progress-bar::-moz-progress-bar {
+  background-color: #000000
+}
+
+.my-progress-bar-no-alarms::-webkit-progress-value {
+  background-color: #4E79A6
+}
+
+.my-progress-bar-no-alarms::-moz-progress-bar {
+  background-color: #4E79A6
+}
+
+.my-progress-bar-alarms::-webkit-progress-value {
+  background-color: #FE6265
+}
+
+.my-progress-bar-alarms::-moz-progress-bar {
+  background-color: #FE6265
+}
+
+.bar-chart {
+  height: 512px;
+}
+
+
+.piechart {
+  height: 306px;
+}
+
+.region-chart {
+  height: 252px;
+}
+
+.tab-slider--nav {
+  width: 100%;
+  float: left;
+  margin-bottom: 20px;
+}
+
+.tab-slider--tabs {
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  border-radius: 35px;
+  overflow: hidden;
+  background: #ebebeb;
+  height: 26px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.tab-slider--tabs:after {
+  content: "";
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transition: all 250ms ease-in-out;
+  transition: all 250ms ease-in-out;
+  border-radius: 35px;
+}
+
+.tab-slider--tabs.slide:after {
+  left: 50%;
+}
+
+.tab-slider--trigger {
+  font-size: 12px;
+  line-height: 1;
+  font-weight: bold;
+  color: #345F90;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 8px 10px;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  display: inline-block;
+  -webkit-transition: color 250ms ease-in-out;
+  transition: color 250ms ease-in-out;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.person-dash-alarm {
+  height: 552px;
+}
+
+.dash-alarmsdetails {
+  height: 204px;
+}
+
+.regionfillter {
+  height: 586px;
+}
+
+.tab-slider--trigger.active {
+  color: #fff;
+  background: #345F90;
+}
+
+#regionWiseAlarmsReport,
+#totalPersonsScannedReport {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 1.5),
+screen and (min-device-width: 1366px) and (max-device-width: 2048px) and (min-device-height: 854px) and (max-device-height: 1536px) {
+  .bar-chart {
+    height: 460px;
+  }
+
+  .person-dash-alarm {
+    height: 500px;
+  }
+
+  .dash-alarmsdetails {
+    height: 152px;
+  }
+
+  .region-chart {
+    height: 230px;
+  }
+
+  .regionfillter {
+    height: 542px;
+  }
+}
+
+.mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
+  border: 1px solid #E4E4E4;
+  height: 38px;
+}
+
+.mdc-text-field--filled {
+  --mdc-filled-text-field-active-indicator-height: 0px !important;
+  --mdc-filled-text-field-container-shape: 0px !important;
+}
+
+.mat-mdc-icon-button {
+  --mdc-icon-button-state-layer-size: 38px !important;
+  padding: 0px !important;
+}
+
+.mat-datepicker-content .mat-calendar {
+  background-color: white;
+}
+
+.mat-calendar-body-cell-content {
+  border-color: white !important;
+}
+
+.mat-calendar-body-selected {
+  background-color: #9c27b0 !important;
+  color: white !important;
+}
+
+.mdc-text-field {
+  padding: 0px 2px !important;
+}
+
+.mdc-text-field__input {
+  padding-top: 8px !important;
+}
+
+.mat-datepicker-toggle-default-icon {
+  margin-left: 0px !important;
+}
+
+.mat-mdc-form-field .mdc-line-ripple {
+  display: none !important;
+}

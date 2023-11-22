@@ -1,0 +1,180 @@
+<div class="main-navbar-container" style="width: 100%; height: 60px; z-index: 999;">
+    <div class="row">
+        <div class="col-lg-3 col-xs-3">&nbsp;</div>
+        <div class="col-lg-6 col-xs-5">
+            <div class="branding-col">
+                <div class="brand-wrapper" style="text-align: center;">
+                    <img class="brand-logo" src="kong/location/logo"
+                        onerror="this.onerror=null; this.src='/assets/images/Liberty-Defense-Logo-.png'" alt="Logo"
+                        height="55" style="margin-top: 5px;">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-4 text-right mt-15">
+            <button type="button" (click)="onAddClick()" class="menu-toggle"
+                style="font-size: 26px; cursor: pointer; background: none; border: 0px none;" *ngIf="isMobile">
+                <i class="fa fa-cogs"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="inputWrapper login">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="card">
+                <div class="login_wrapper">
+
+                    <form class="form-horizontal login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()"
+                        autocomplete="off">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="row text-center responsive-hide">
+                                    <div class="col-sm-12">
+                                        <h2>&nbsp;</h2>
+                                    </div>
+                                </div>
+                                <div class="row text-center">
+                                    <div class="col-sm-12">
+                                        <div class="row">
+                                            <div class="col-sm-7"></div>
+                                            <div class="col-sm-5">
+                                                <span style="font-size:16px; float: left;font-weight: bold;">
+                                                    <i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;
+                                                    {{ time | date:'yyyy/MM/dd '}}
+                                                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                                                    {{ time | date:'HH:mm:ss'}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-7"></div>
+                                            <div class="col-sm-5">
+                                                <span style="font-size:16px;float: left;">
+                                                    <img alt="" _ngcontent-dlv-c2="" alt="counter1"
+                                                        style="height:16px; width: 16px;margin-right: 4px;"
+                                                        src="../../../assets/images/counter1.png">
+                                                    <strong>
+                                                        Scan Count :
+                                                    </strong>&nbsp;
+                                                    {{ scancountstring }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <h2 class="title_text" translate>lblLoginHeading</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div>
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-8">
+
+                                    <div class="row text-center mt-25">
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                        <label class="col-xs-8 col-sm-10 label-text nopadding" translate>
+                                            <i class="fa fa-user"></i>&nbsp;
+                                            USER NAME
+                                        </label>
+                                        <div class="col-xs-2 col-sm-1 responsive-hide">&nbsp;</div>
+                                    </div>
+
+                                    <div class="row text-center">
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                        <div class="col-xs-8 col-sm-10 nopadding" id="email_input_wrapper">
+                                            <input id="email" #email type="email" class="form-control"
+                                                placeholder="{{'lblTypename' | translate}}" (paste)="onPaste($event)"
+                                                formControlName="email" autocomplete="off">
+                                            <span class="message-text" style="top: 10px;"
+                                                translate>lblLoggedInAlready</span>
+                                        </div>
+                                        <div class="col-xs-2 col-sm-1">
+                                            <div class="ld_tooltip" id="emailToolTip" translate>lblEmailcannotbefound
+                                            </div>
+                                            <span class="icon_tickcross" style="float: left;" id="emailTickRight"><img
+                                                    alt="" src="../../../assets/images/checkmark2x.png" /></span>
+                                            <span class="icon_tickcross" style="float: left;" id="emailTickWrong"><img
+                                                    alt="" src="../../../assets/images/invalidcross2x.png" /></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row text-center mt-25">
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                        <label class="col-xs-8 col-sm-10 label-text nopadding"><i
+                                                class="fa fa-light fa-lock"></i>&nbsp;PASSWORD
+                                        </label>
+                                        <div class="col-xs-2 col-sm-1 responsive-hide">&nbsp;</div>
+                                    </div>
+
+                                    <div class="row text-center">
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                        <div class="col-xs-8 col-sm-10 nopadding">
+                                            <div class="row text-center">
+                                                <div class="col-xs-12 col-sm-12 mb-10">
+                                                    <input [type]="showPasswordOnPress ? 'text' : 'password'" #password
+                                                        formControlName="password" class="form-control">
+                                                </div>
+                                                <div (pointerdown)="showPasswordOnPress = !showPasswordOnPress"
+                                                    (pointerup)="showPasswordOnPress = !showPasswordOnPress"
+                                                    (pointerleave)="showPasswordOnPress = false">
+                                                    <i alt="show" class="fa fa-eye eye-show"
+                                                        [class.hide]="showPasswordOnPress"></i>
+                                                    <i alt="hide" class="fa fa-eye-slash eye-show"
+                                                        [class.hide]="!showPasswordOnPress"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row text-center">
+                                        <div class="col-xs-2 col-sm-1">&nbsp;</div>
+                                        <div class="col-xs-8 col-sm-10 nopadding">
+
+                                        </div>
+                                        <div class="col-xs-2 col-sm-1">
+                                            <div class="ld_tooltip" id="passcodeToolTip" translate>msgIncorrectTryAgain
+                                            </div>
+                                            <span class="icon_tickcross" style="float: left;"
+                                                id="passcodeTickWrong"><img alt=""
+                                                    src="../../../assets/images/invalidcross2x.png" /></span>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="row text-center notlogin mt-25">
+                                        <a class="col-sm-12 label_link" href="#" *ngIf="selfRegistration"
+                                            (click)="forgotPassword()" translate>lblForgotemailorpasscode</a>
+                                    </div> -->
+                                    <div class="row text-center notlogin mt-25">
+                                        <div class="col-xs-3 col-sm-1"></div>
+                                        <div class="col-xs-6 col-sm-10">
+                                            <button class="globalButton" [disabled]="!loginForm.valid"
+                                                style="font-size: 16px;" type="submit">
+                                                <span><i class="fa fa-sign-in fa-2x login_icon" aria-hidden="true"></i>
+                                                </span>
+                                                <p translate>lblLOGIN</p>
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-2 col-sm-1"></div>
+                                    </div>
+
+                                    <div class="row text-center mt-25">
+                                        <p class="col-sm-12 label_link" href="#" *ngIf="selfRegistration"
+                                            (click)="navigateRegister()"><strong translate>lblREGISTER</strong></p>
+                                    </div>
+
+                                    <div class="row text-center mt-25 responsive-hide">
+                                        <div class="col-sm-12">
+                                            <h2>&nbsp;</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

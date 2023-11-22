@@ -1,0 +1,111 @@
+{
+  "/auth/*": {
+    "target": {
+      "host": "172.16.2.171",
+      "protocol": "http:",
+      "port": 8180
+    },
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  },
+  "/stop-fpga-interface/*": {
+    "target": {
+      "host": "172.16.2.171",
+      "protocol": "http:",
+      "port": 8567
+    },
+    "secure": false
+  },
+  "/start-fpga-interface/*": {
+    "target": {
+      "host": "172.16.2.171",
+      "protocol": "http:",
+      "port": 8567
+    },
+    "secure": false
+  },
+  "/calibrate-air/*": {
+    "target": {
+      "host": "172.16.2.171",
+      "protocol": "http:",
+      "port": 8567
+    },
+    "secure": false
+  },
+  "/process-image/*": {
+    "target": {
+      "host": "172.16.2.171",
+      "protocol": "http:",
+      "port": 8567
+    },
+    "secure": false
+  },
+  "/save-air/*": {
+    "target": {
+      "host": "172.16.2.171",
+      "protocol": "http:",
+      "port": 8567
+    },
+    "secure": false
+  },
+  "/save-phase/*": {
+    "target": {
+      "host": "172.16.2.171",
+      "protocol": "http:",
+      "port": 8567
+    },
+    "secure": false
+  },
+  "/calibrate-phase/*": {
+    "target": {
+      "host": "172.16.2.171",
+      "protocol": "http:",
+      "port": 8567
+    },
+    "secure": false
+  },
+  "/start-capture/*": {
+    "target": {
+      "host": "172.16.2.171",
+      "protocol": "http:",
+      "port": 8567
+    },
+    "secure": false
+  },
+  "/stop-capture/*": {
+    "target": {
+      "host": "172.16.2.171",
+      "protocol": "http:",
+      "port": 8567
+    },
+    "secure": false
+  },
+  "/timing-offset/*": {
+    "target": {
+      "host": "172.16.2.171",
+      "protocol": "http:",
+      "port": 8567
+    },
+    "secure": false
+  },
+  "/save-timing-offset/*": {
+    "target": {
+      "host": "172.16.2.171",
+      "protocol": "http:",
+      "port": 8567
+    },
+    "secure": false
+  },
+  "/kong/*": {
+    "target": {
+      "host": "172.16.2.171",
+      "protocol": "http:",
+      "port": 8000
+    },
+    "secure": false,
+    "pathRewrite": {
+      "^/kong/*": "/"
+    }
+  }
+}

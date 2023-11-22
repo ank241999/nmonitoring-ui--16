@@ -1,0 +1,56 @@
+/*!
+ * ../stylesheets/bootstrap v3.4.1 (https://get../stylesheets/bootstrap.com/)
+ * Copyright 2011-2019 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/../stylesheets/bootstrap/blob/master/LICENSE)
+ */
+
+// Core variables and mixins
+@import "../stylesheets/bootstrap/_variables.scss";
+@import "../stylesheets/bootstrap/mixins";
+
+// Reset and dependencies
+@import "../stylesheets/bootstrap/_normalize.scss";
+@import "../stylesheets/bootstrap/_print.scss";
+@import "../stylesheets/bootstrap/_glyphicons.scss";
+
+// Core CSS
+@import "../stylesheets/bootstrap/_scaffolding.scss";
+@import "../stylesheets/bootstrap/_type.scss";
+@import "../stylesheets/bootstrap/_code.scss";
+@import "../stylesheets/bootstrap/_grid.scss";
+@import "../stylesheets/bootstrap/_tables.scss";
+@import "../stylesheets/bootstrap/_forms.scss";
+@import "../stylesheets/bootstrap/_buttons.scss";
+
+// Components
+@import "../stylesheets/bootstrap/_component-animations.scss";
+@import "../stylesheets/bootstrap/_dropdowns.scss";
+@import "../stylesheets/bootstrap/_button-groups.scss";
+@import "../stylesheets/bootstrap/_input-groups.scss";
+@import "../stylesheets/bootstrap/_navs.scss";
+@import "../stylesheets/bootstrap/_navbar.scss";
+@import "../stylesheets/bootstrap/_breadcrumbs.scss";
+@import "../stylesheets/bootstrap/_pagination.scss";
+@import "../stylesheets/bootstrap/_pager.scss";
+@import "../stylesheets/bootstrap/_labels.scss";
+@import "../stylesheets/bootstrap/_badges.scss";
+@import "../stylesheets/bootstrap/_jumbotron.scss";
+@import "../stylesheets/bootstrap/_thumbnails.scss";
+@import "../stylesheets/bootstrap/_alerts.scss";
+@import "../stylesheets/bootstrap/_progress-bars.scss";
+@import "../stylesheets/bootstrap/_media.scss";
+@import "../stylesheets/bootstrap/_list-group.scss";
+@import "../stylesheets/bootstrap/_panels.scss";
+@import "../stylesheets/bootstrap/_responsive-embed.scss";
+@import "../stylesheets/bootstrap/_wells.scss";
+@import "../stylesheets/bootstrap/_close.scss";
+
+// Components w/ JavaScript
+@import "../stylesheets/bootstrap/_modals.scss";
+@import "../stylesheets/bootstrap/_tooltip.scss";
+@import "../stylesheets/bootstrap/_popovers.scss";
+@import "../stylesheets/bootstrap/_carousel.scss";
+
+// Utility classes
+@import "../stylesheets/bootstrap/_utilities.scss";
+@import "../stylesheets/bootstrap/_responsive-utilities.scss";

@@ -1,0 +1,73 @@
+@import '../../../styles/_variables';
+@import '../../../styles/_mixins';
+
+
+
+.alert-modal {
+height: 288px;
+width: 432px;
+padding: 0px !important;
+
+  .alert-modal-title {
+    color: $libertyBlue;
+    background-color: #FFFB61;
+    margin: 0px;
+    font-family: Arial;
+    font-size: 20px;
+    height: 62px;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .alert-modal-text {
+    color: $grey8;
+    display: block;
+    text-align: center;
+  }
+
+  .alert-modal-icon {
+    display: block;
+    font-size: 100px;
+    text-align: center;
+
+    &.alert-modal-icon-success {
+      color: $aqua;
+    }
+
+    &.alert-modal-icon-failure {
+      color: $red;
+    }
+  }
+
+  .alert-modal-buttons {
+    text-align: center;
+  
+    justify-content: center;
+
+    .alert-modal-button {
+      @include button($white, $libertyBlue, $libertyBlue);
+      margin-bottom: 10px;
+      margin-top: 40px;
+      min-width: 60px;
+      font-weight: 400;
+      width: 100px;
+      height: 100px;
+      font-size: 16px;
+
+      &.alert-modal-button-success {
+        @include button($white, $libertyBlue, $libertyBlue);
+        margin-right: 10px;
+      }
+
+      &.alert-modal-button-failure {
+        @include button($white, $libertyBlue, $libertyBlue);
+      }
+    }
+  }
+}
+.log_ad_alret {
+	font-size: 16px;
+	font-weight: bold;
+	margin-top: 30px;
+}

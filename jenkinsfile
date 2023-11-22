@@ -1,0 +1,111 @@
+pipeline {
+  //  agent  {label 'master'}
+//	options { 
+	//            disableConcurrentBuilds()
+				//timeout(time: 30, unit: 'MINUTES')		
+	//		}
+     stages {
+        stage('Install npm Packages') {
+            steps {
+                sh "npm install"
+            }
+        }
+
+		stage('Build') {
+            steps {
+                sh "node_modules/.bin/ng build --prod"
+            }
+        }
+     }
+}
+
+pipeline {
+     stages {
+        stage('Install npm Packages') {
+           agent {
+                docker {
+                    image 'node16'
+                    args '-u root:root'
+                    // Optionally, you can mount volumes with args like this:
+                    // args '-v /ng:/*'
+                }
+            }
+            steps {
+                sh "npm install"
+            }
+        }
+
+		stage('Build') {
+            agent {
+                docker {
+                    image 'node16'
+                   // args '-v /home/rsaini_libertydefense_com/ng:/*'                   
+                }
+            }
+            steps {
+                 sh "pwd"
+                sh "ls"
+                sh "node_modules/.bin/ng build "
+            }
+        }
+				
+//		stage('Sonar Code Analysis') {
+//            agent {
+//                docker {
+//                    image 'node:23'
+//                    args '-u root:root'
+//                }
+//            }
+//            steps {
+//                withSonarQubeEnv('Sonar1') {
+//                    sh "npm run sonar"
+ //               }
+//            }
+//        }	
+// 		stage("Quality Gate") {
+//            agent {
+//                docker {
+//                    image 'mynode23'
+//                }
+//           }
+//            steps {
+//                timeout(time: 10, unit: 'MINUTES') {
+//                    waitForQualityGate abortPipeline: true
+//                }
+//            }
+//          }	
+
+		stage("Build Docker Image") {
+            agent  {label 'master'}
+		     steps {
+                sh "pwd"
+			    sh "docker image prune -f"
+			    dockerBuild(pipelineParams.registry_url, pipelineParams.image_tag)
+		    }
+		}
+		stage("Push Image On GCR") {
+	        steps {
+      			dockerPush(pipelineParams.image_name, pipelineParams.image_tag)
+			}
+		}
+//		stage("Pull and execute on dev-vm") {
+	//        agent { label 'jenkins-slave'}
+	//		steps {
+		//		playBook(pipelineParams.yml_filename)
+			//}
+		//}
+		stage("Delete Image from Jenkins") {
+		    steps {
+      			dockerRemoveImage(pipelineParams.image_name, pipelineParams.image_tag)
+				sh "docker image prune -f"
+			}
+		}
+        }
+		 post {
+            always {
+                   deleteDir() // This step will remove the workspace
+                    }
+            }
+    
+ }
+}

@@ -1,0 +1,88 @@
+<div class="row">
+	<div class="col-lg-7 col-xs-7">
+		<div class="branding-col">
+			<div class="row">
+				<div class="col-lg-1 col-xs-2 text-center pd-left-5 pd-right-5 pd-top-15 fit-content"
+					style="z-index: 9999;">
+					<button type="button" (click)="toggleSideMenu()" class="menu-toggle"
+						[ngClass]="{ 'menu-visible': sideMenuVisible, 'menu-hidden': !sideMenuVisible }">
+						<i class="fa fa-bars"></i>
+					</button>
+				</div>
+
+				<!-- <div class="col-lg-1 col-xs-2 text-center pd-left-5 pd-right-5 pd-top-15 fit-content responsive-hide"
+					*ngIf="isAdmin">
+					<app-notifications-menu-button [notifications]="notifications"></app-notifications-menu-button>
+				</div> -->
+				<!-- <div class="col-lg-10 col-xs-8 pd-left-10 pd-top-15 responsive-margin1 responsive-hide">
+					<div *ngIf="!isAdmin" class="float-left ml-20 mr-20">
+						<h1 class="responsice-center mt-5" style="color: #8292A0; font-size: 20px;">GATE: <span
+								style="color: #ffffff;">North Entrance</span></h1>
+					</div>
+					<div *ngIf="!isAdmin" class="float-left mr-20">
+						<h1 class="responsice-center mt-5" style="color: #8292A0; font-size: 20px;">LANE: <span
+								style="color: #ffffff;">One</span></h1>
+					</div> -->
+				<!-- <span class="user-name"
+						*ngIf="isAdmin">{{logggedInUser}}</span>
+					<span class="tablet-ip pd-left-15"
+						*ngIf="isAdmin">11.22.33.44.55.66.</span> -->
+				<!-- </div> -->
+
+			</div>
+		</div>
+	</div>
+	<!-- <app-search-bar class="hidden-xs"></app-search-bar> -->
+
+	<div class="col-lg-5 col-xs-5 text-center">
+		<div class="branding-col">
+			<div class="brand-wrapper text-right">
+				<img id="app_logo" class="brand-logo" src="kong/location/logo"
+					onerror="this.onerror=null; this.src='/assets/images/Liberty-Defense-Logo-.png'"
+					[routerLink]="isAdmin ? ['/admin/dashboard'] : ['/admin/activitymonitoring']" alt="Logo" height="55"
+					style="margin-bottom: 10px; margin-right: 10px;">
+
+				<a class="btn home-button"
+					[routerLink]="isAdmin ? ['/admin/dashboard'] : ['/admin/activitymonitoring']">
+					<p class="Logoff"><i class="fa fa-home" aria-hidden="true"
+							style="color: gray; font-size: 42px;"></i><br />
+					</p>
+				</a>
+				<div class="btn" style="cursor: default;">
+					<p><i class="fa fa-wifi" aria-hidden="true"
+							[ngStyle]="isconnection == true?{'color': '#5feb18','font-size':'40px'} : {'color': 'red','font-size':'40px'}"></i><br />
+					</p>
+				</div>
+				<!-- <button style="height: 40px; width: 60px; font-size: 10px; border-radius: 8px;" (click)="logout()"><i
+						class="fa fa-power-off" aria-hidden="true" style="color: red; font-size: 20px;"></i>
+					<br>LOG OFF</button> -->
+				<a class="btn" (click)="logout()">
+					<p class="Logoff"><i class="fa fa-sign-out" aria-hidden="true"
+							style="color: red; font-size: 42px;"></i><br />
+					</p>
+				</a>
+			</div>
+		</div>
+	</div>
+</div> <!-- Row End  -->
+
+<div class="row desktop-hide responsive-show">
+	<div class="col-xs-2 text-center">
+		&nbsp;
+	</div>
+	<div class="col-xs-8 text-center">
+		<span class="user-name" style="color: #ffffff; font-weight: bold; font-size: 18px;">{{logggedInUser}}</span>
+	</div>
+	<div class="col-xs-2 text-center">
+		<app-notifications-menu-button [notifications]="notifications"></app-notifications-menu-button>
+	</div>
+</div>
+
+<div class="row desktop-hide responsive-show">
+	<div class="col-xs-12 text-center">
+		<span class="user-name" style="color: #8292A0; font-weight: bold; font-size: 18px;">11.22.33.44.55.66.</span>
+	</div>
+	<!-- <div class="col-xs-2 text-center pd-left-5 pd-right-5 pd-top-15 fit-content">
+		<app-notifications-menu-button [notifications]="notifications"></app-notifications-menu-button>
+	</div> -->
+</div>

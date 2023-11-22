@@ -1,0 +1,79 @@
+@import '../../../styles/variables';
+@import '../../../styles/_mixins';
+
+.alert-modal {
+    height: 288px;
+    width: 432px;
+
+    .alert-model-close {
+        background: none;
+        border: 0px none;
+        cursor: pointer;
+        font-size: 26px;
+        margin-top: -10px;
+        outline: none;
+    }
+
+    .alert-modal-title {
+        color: $libertyBlue;
+        background-color: #FFFB61;
+        margin: 0px;
+        font-family: Arial;
+        font-size: 24px;
+        height: 62px;
+        font-weight: bold;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .button-close {
+        cursor: pointer;
+        border: solid 0px;
+        height: 20px;
+        width: 20px;
+        margin-right: 10px;
+        float: right;
+    }
+
+    .labels {
+        margin-top: 5px;
+    }
+
+    .alert-modal-text {
+        color: $grey8;
+        display: block;
+        text-align: center;
+    }
+
+    .alert-modal-input {
+        color: $tableHeaderColor;
+        font-size: 16px;
+        font-weight: bold;
+        min-height: 40px;
+        border-radius: 0px;
+    }
+
+    .alert-modal-buttons {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+
+        .alert-modal-button {
+            @include button($white, $libertyBlue, $libertyBlue);
+            margin-bottom: 10px;
+            margin-top: 40px;
+            min-width: 60px;
+            font-weight: 400;
+            width: 60%;
+
+            &.alert-modal-button-success {
+                @include button($white, $libertyBlue, $libertyBlue);
+                margin-right: 10px;
+            }
+
+            &.alert-modal-button-failure {
+                @include button($white, $libertyBlue, $libertyBlue);
+            }
+        }
+    }
+}

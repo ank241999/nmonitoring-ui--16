@@ -1,0 +1,19 @@
+.mat-select-arrow {
+    width: 0;
+    height: 0;
+    border-left: 0px !important;
+    border-right: 0px !important;
+    border-top: 0px !important;
+    margin: 0 4px;
+}
+
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
+    background-color: #ffffff;
+    opacity: 1;
+}
+
+.mat-select-disabled .mat-select-value {
+    color: #4a4a4a !important;
+}

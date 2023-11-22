@@ -1,0 +1,42 @@
+<div class="alert-modal">
+    <div>
+        <h4 class="alert-modal-title">Enter Password
+            <img alt="" src="../../../assets/images/closescreen_icon.jpg" (click)="onScreenClose()"
+                class="button-close" />
+        </h4>
+    </div>
+    <form class="form-horizontal" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <div class="row mt-10">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-2"><label class="labels" [attr.for]="'password'"> {{title}} </label></div>
+                <div class="col-xs-7">
+                    <input class="form-control alert-modal-input" type="password"
+                        placeholder="{{'addTypehere' | translate}}" formControlName="password">
+                </div>
+                <div class="col-xs-1"></div>
+            </div>
+            <div class="row mt-10">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-2"> <label class="labels" [attr.for]="'password'"> {{titlePrimary}} </label></div>
+                <div class="col-xs-7">
+                    <input class="form-control alert-modal-input" type="password"
+                        placeholder="{{'addTypehere' | translate}}" formControlName="passwordPrimary">
+                </div>
+                <div class="col-xs-1"></div>
+            </div>
+            <div class="alert-modal-buttons mt-10">
+                <div class="col-xs-3"></div>
+                <div class="col-xs-6">
+                    <button type="submit" class="globalButton" [disabled]="!form.valid">
+                        <span>
+                            <i class="fa fa-undo fa-2x" aria-hidden="true"></i>
+                        </span>
+                        <p>REBOOT</p>
+                    </button>
+                </div>
+                <div class="col-xs-3"></div>
+            </div>
+        </div>
+    </form>
+</div>
