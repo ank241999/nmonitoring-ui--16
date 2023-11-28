@@ -60,7 +60,7 @@ agent any
 		     steps {
                 sh "pwd"
 			    sh "docker image prune -f"
-       sh "docker build -t " " ank1999/myapplocation: latest . " 
+       sh "docker build -t ank1999/myapplocation:latest . " 
 			    //dockerBuild(pipelineParams.registry_url, pipelineParams.image_tag)
 		    }
 		}
