@@ -56,8 +56,9 @@ agent any
 //          }	
 
 		stage("Build Docker Image") {
-            agent  {label 'master'}
-		     steps {
+     //       agent  {label 'master'}
+		    agent any
+         steps {
                 sh "pwd"
 			    sh "docker image prune -f"
        sh "docker build -t ank1999/myapplocation:latest . " 
